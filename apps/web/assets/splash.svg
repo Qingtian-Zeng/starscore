@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2732" height="2732" viewBox="0 0 2732 2732">
+  <rect width="2732" height="2732" fill="#080d1d"/>
+  <g transform="translate(854 690) scale(1)"><path d="M120 720L360 390L575 585L900 180" fill="none" stroke="#77ddf6" stroke-width="46" stroke-linecap="round" stroke-linejoin="round" opacity=".72"/><g fill="#e7eef8" stroke="#77ddf6" stroke-width="20"><circle cx="120" cy="720" r="48"/><circle cx="360" cy="390" r="58"/><circle cx="575" cy="585" r="54"/><circle cx="900" cy="180" r="68"/></g></g>
+  <text x="1366" y="1760" fill="#e7eef8" font-family="sans-serif" font-size="150" text-anchor="middle" letter-spacing="24">星谱</text><text x="1366" y="1910" fill="#91a8bc" font-family="sans-serif" font-size="54" text-anchor="middle" letter-spacing="18">STARSCORE</text>
+</svg>

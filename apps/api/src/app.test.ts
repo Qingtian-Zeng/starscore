@@ -1,0 +1,9 @@
+import { describe,expect,it } from "vitest";
+import { createNightSailProject,createResponseRequest,validateResponsePayload } from "@starscore/core";
+import { buildApp } from "./app.js";
+
+describe("response api",()=>{
+  it("reports configuration without exposing secrets and returns two valid rule candidates",async()=>{const app=buildApp();const health=await app.inject({method:"GET",url:"/api/health"});expect(health.statusCode).toBe(200);expect(health.json()).toEqual({ok:true,modelConfigured:false});const request=createResponseRequest(createNightSailProject(),"req-test","rules");const response=await app.inject({method:"POST",url:"/api/ai/responses",payload:request});expect(response.statusCode).toBe(200);const payload=response.json();expect(payload.provider).toBe("rules");expect(payload.candidates).toHaveLength(2);expect(validateResponsePayload(payload,request)).toEqual([]);await app.close();});
+  it("fails clearly when model configuration is absent",async()=>{const app=buildApp();const request=createResponseRequest(createNightSailProject(),"req-model","model");const response=await app.inject({method:"POST",url:"/api/ai/responses",payload:request});expect(response.statusCode).toBe(503);expect(response.json().code).toBe("MODEL_NOT_CONFIGURED");await app.close();});
+  it("allows the Capacitor origin without reflecting unknown origins",async()=>{const app=buildApp();const allowed=await app.inject({method:"OPTIONS",url:"/api/ai/responses",headers:{origin:"https://localhost"}});expect(allowed.statusCode).toBe(204);expect(allowed.headers["access-control-allow-origin"]).toBe("https://localhost");const denied=await app.inject({method:"GET",url:"/api/health",headers:{origin:"https://unknown.example"}});expect(denied.headers["access-control-allow-origin"]).toBeUndefined();await app.close();});
+});

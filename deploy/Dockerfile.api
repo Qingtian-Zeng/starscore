@@ -1,0 +1,21 @@
+FROM node:24-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/web/package.json apps/web/package.json
+COPY packages/core/package.json packages/core/package.json
+RUN npm ci
+COPY packages/core packages/core
+COPY apps/api apps/api
+RUN npm run build --workspace @starscore/core && npm run build --workspace @starscore/api
+
+FROM node:24-alpine
+WORKDIR /app
+ENV NODE_ENV=production HOST=0.0.0.0 PORT=8787
+COPY --from=build /app/package.json /app/package-lock.json ./
+COPY --from=build /app/node_modules node_modules
+COPY --from=build /app/packages/core packages/core
+COPY --from=build /app/apps/api apps/api
+EXPOSE 8787
+HEALTHCHECK --interval=15s --timeout=3s --retries=5 CMD node -e "fetch('http://127.0.0.1:8787/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+CMD ["node","apps/api/dist/server.js"]

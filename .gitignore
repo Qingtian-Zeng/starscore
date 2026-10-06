@@ -1,0 +1,16 @@
+node_modules
+dist
+.vite
+coverage
+*.log
+*.tsbuildinfo
+.sites-runtime
+.env
+.env.*
+!.env.example
+.gradle
+**/local.properties
+**/build
+*.apk
+*.aab
+releases/

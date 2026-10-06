@@ -1,0 +1,16 @@
+{
+  "name": "starscore",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "npm run dev:web",
+    "dev:web": "npm run dev --workspace @starscore/web",
+    "dev:api": "npm run dev --workspace @starscore/api",
+    "android:sync": "npm run build --workspace @starscore/web && npm run cap:sync --workspace @starscore/web",
+    "android:open": "npm run cap:open --workspace @starscore/web",
+    "build": "npm run build --workspace @starscore/core && npm run build --workspace @starscore/api && npm run build --workspace @starscore/web",
+    "check": "npm run build --workspace @starscore/core && npm run check --workspace @starscore/core && npm run check --workspace @starscore/api && npm run check --workspace @starscore/web && npm run test --workspace @starscore/core && npm run test --workspace @starscore/api && npm run test --workspace @starscore/web"
+  },
+  "engines": { "node": ">=20" }
+}

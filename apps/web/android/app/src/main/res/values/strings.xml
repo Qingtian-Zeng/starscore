@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">星谱 StarScore</string>
+    <string name="title_activity_main">星谱 StarScore</string>
+    <string name="package_name">com.starscore.app</string>
+    <string name="custom_url_scheme">com.starscore.app</string>
+</resources>

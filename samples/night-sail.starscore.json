@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "id": "sample-night-sail",
+  "title": "夜航",
+  "createdAt": "2026-10-05T00:00:00.000Z",
+  "updatedAt": "2026-10-05T00:00:00.000Z",
+  "revision": 0,
+  "seedRevision": 0,
+  "music": {
+    "ppq": 480,
+    "bpm": 90,
+    "meter": [
+      4,
+      4
+    ],
+    "loopBars": 4,
+    "key": "C",
+    "scale": "major-pentatonic"
+  },
+  "tracks": {
+    "lead": {
+      "id": "lead",
+      "events": [
+        {
+          "id": "night-1",
+          "pitch": 60,
+          "startTick": 0,
+          "durationTick": 480,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        },
+        {
+          "id": "night-2",
+          "pitch": 64,
+          "startTick": 480,
+          "durationTick": 480,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        },
+        {
+          "id": "night-3",
+          "pitch": 67,
+          "startTick": 960,
+          "durationTick": 480,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        },
+        {
+          "id": "night-4",
+          "pitch": 69,
+          "startTick": 1440,
+          "durationTick": 480,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        },
+        {
+          "id": "night-5",
+          "pitch": 67,
+          "startTick": 1920,
+          "durationTick": 960,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        },
+        {
+          "id": "night-6",
+          "pitch": 64,
+          "startTick": 2880,
+          "durationTick": 960,
+          "velocity": 0.65,
+          "origin": "user",
+          "editedByUser": false
+        }
+      ]
+    },
+    "bass": {
+      "id": "bass",
+      "events": [
+        {
+          "id": "bass-0",
+          "pitch": 36,
+          "startTick": 0,
+          "durationTick": 960,
+          "velocity": 0.48,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "bass-1",
+          "pitch": 43,
+          "startTick": 1920,
+          "durationTick": 960,
+          "velocity": 0.48,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "bass-2",
+          "pitch": 36,
+          "startTick": 3840,
+          "durationTick": 960,
+          "velocity": 0.48,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "bass-3",
+          "pitch": 43,
+          "startTick": 5760,
+          "durationTick": 960,
+          "velocity": 0.48,
+          "origin": "rules",
+          "editedByUser": false
+        }
+      ]
+    },
+    "drums": {
+      "id": "drums",
+      "events": [
+        {
+          "id": "drum-0-0",
+          "instrument": "kick",
+          "startTick": 0,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-0-2",
+          "instrument": "tap",
+          "startTick": 480,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-0-4",
+          "instrument": "kick",
+          "startTick": 960,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-0-6",
+          "instrument": "tap",
+          "startTick": 1440,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-0-7",
+          "instrument": "hat",
+          "startTick": 1680,
+          "velocity": 0.34,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-1-0",
+          "instrument": "kick",
+          "startTick": 1920,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-1-2",
+          "instrument": "tap",
+          "startTick": 2400,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-1-4",
+          "instrument": "kick",
+          "startTick": 2880,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-1-6",
+          "instrument": "tap",
+          "startTick": 3360,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-1-7",
+          "instrument": "hat",
+          "startTick": 3600,
+          "velocity": 0.34,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-2-0",
+          "instrument": "kick",
+          "startTick": 3840,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-2-2",
+          "instrument": "tap",
+          "startTick": 4320,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-2-4",
+          "instrument": "kick",
+          "startTick": 4800,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-2-6",
+          "instrument": "tap",
+          "startTick": 5280,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-2-7",
+          "instrument": "hat",
+          "startTick": 5520,
+          "velocity": 0.34,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-3-0",
+          "instrument": "kick",
+          "startTick": 5760,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-3-2",
+          "instrument": "tap",
+          "startTick": 6240,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-3-4",
+          "instrument": "kick",
+          "startTick": 6720,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-3-6",
+          "instrument": "tap",
+          "startTick": 7200,
+          "velocity": 0.55,
+          "origin": "rules",
+          "editedByUser": false
+        },
+        {
+          "id": "drum-3-7",
+          "instrument": "hat",
+          "startTick": 7440,
+          "velocity": 0.34,
+          "origin": "rules",
+          "editedByUser": false
+        }
+      ]
+    }
+  },
+  "layout": {
+    "notes": {
+      "night-1": {
+        "xNorm": 0.14285714285714285
+      },
+      "night-2": {
+        "xNorm": 0.2857142857142857
+      },
+      "night-3": {
+        "xNorm": 0.42857142857142855
+      },
+      "night-4": {
+        "xNorm": 0.5714285714285714
+      },
+      "night-5": {
+        "xNorm": 0.7142857142857143
+      },
+      "night-6": {
+        "xNorm": 0.8571428571428571
+      }
+    }
+  },
+  "mixer": {
+    "lead": {
+      "enabled": true,
+      "gain": 0.82
+    },
+    "bass": {
+      "enabled": true,
+      "gain": 0.52
+    },
+    "drums": {
+      "enabled": true,
+      "gain": 0.42
+    }
+  }
+}
