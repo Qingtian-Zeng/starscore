@@ -6,7 +6,7 @@
 
 运行成功后下载：`starscore-debug-apk`、`starscore-build-evidence` 和 `starscore-compose-evidence`。前两者分别包含 `app-debug.apk` 与 check/Web/assets/Gradle 日志、SHA-256。工作流会在 Ubuntu 24.04 上用 `@capacitor/assets` 从 `apps/web/assets/icon.svg`、`splash.svg` 生成 Android 密度资源。
 
-当前工作区无 `.git` 与远端仓库，工作流尚未实际运行；因此 APK 与云端日志仍为待生成，不应引用预期路径作为实际产物。
+GitHub Actions [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 已实际通过，生成并上传 `starscore-debug-apk`。本地下载文件为 `releases/app-debug.apk`（该目录不提交 Git）；真机安装与生命周期仍待设备验收。
 
 ## 已接入
 
@@ -32,7 +32,7 @@ cd apps/web/android
 .\gradlew.bat assembleDebug
 ```
 
-预期 APK：`apps/web/android/app/build/outputs/apk/debug/app-debug.apk`。当前机器因缺少 JDK/SDK 未生成 APK，也未进行模拟器、安装截图或真机验收。
+云端 APK 路径：`apps/web/android/app/build/outputs/apk/debug/app-debug.apk`。当前机器仍缺少 JDK/SDK，未进行模拟器、安装截图或真机验收。
 
 ## App API
 

@@ -4,7 +4,7 @@
 
 `scripts/verify-deployment.mjs <base-url>` 验证 Web 首页、同源 `/api/health` 和规则回应 A/B。GitHub Actions 的 `containers` job 会执行 Compose、运行该脚本、上传 `compose-ps.txt`/`compose.log`，最后清理容器。
 
-本轮在现有本地 Web/API 进程上实际执行通过：HTTP 200、health ok、`modelConfigured:false`、rules A/B 各 6 音。本机没有 Docker，因此这不是容器证据；Compose 实际构建仍需工作流或另一台 Docker 主机执行。没有可用托管环境，HTTPS 公网地址仍受阻。
+本轮在现有本地 Web/API 进程上实际执行通过：HTTP 200、health ok、`modelConfigured:false`、rules A/B 各 6 音。GitHub Actions [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 的 Compose job 也已实际构建并通过相同 smoke test。没有可用托管环境，HTTPS 公网地址仍受阻。
 
 ## Docker Compose
 

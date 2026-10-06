@@ -7,11 +7,11 @@
 | core/API/Web build 与 check | 已验证 | 本地 `npm run build`、`npm run check` 通过；core 11、API 3、Web 1 个测试通过 |
 | 本地 API 健康/CORS | 已验证 | `/api/health` 返回 ok；Capacitor origin OPTIONS 204 |
 | GitHub Actions 配置 | 已验证 | `.github/workflows/delivery-build.yml` 已静态核对，包含 Ubuntu 24.04、JDK 21、SDK 36、检查、Web、资源、Capacitor 与 APK 步骤 |
-| GitHub Actions 实际运行 | 受阻 | 当前目录无 `.git` 与远端仓库，无法 dispatch；没有 run URL 或云端 artifact |
-| 品牌 Android 密度资源 | 待验证 | 工作流使用 `@capacitor/assets` 从 SVG 生成；须以云端日志和 APK 实物确认 |
-| APK 构建/安装截图 | 受阻 | 本机无 JDK、SDK、ADB、模拟器或真机；云端工作流尚未运行 |
+| GitHub Actions 实际运行 | 已验证 | [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 成功，APK 与构建证据已上传 |
+| 品牌 Android 密度资源 | 已验证 | 云端通过 `@capacitor/assets` 从 SVG 生成各密度资源并成功打包 |
+| APK 构建 | 已验证 | `assembleDebug` 成功；安装截图仍待模拟器/真机验证 |
 | Compose 配置与 smoke 脚本 | 已验证 | 工作流与 `scripts/verify-deployment.mjs` 已配置；脚本覆盖 Web、同源 health、规则 A/B |
-| Compose 实际运行 | 受阻 | 本机没有 Docker，云端工作流尚未运行 |
+| Compose 实际运行 | 已验证 | run 37472271902 的 Compose job 已通过 Web、health 与规则回应 smoke test |
 | HTTPS 公网部署 | 受阻 | 未提供托管环境、域名或 TLS 配置 |
 | 真实模型接口 | 受阻 | 缺少 `STARSCORE_MODEL_BASE_URL`、`STARSCORE_MODEL_NAME`、`STARSCORE_MODEL_API_KEY` |
 | 规则候选流程 | 已验证 | 阶段 4–5 已验证 A/B、试听、采用、撤销、保存；来源为 rules |
