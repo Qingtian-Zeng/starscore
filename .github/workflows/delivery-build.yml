@@ -24,14 +24,15 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
           cache: gradle
-      - uses: android-actions/setup-android@v3
       - name: Install Android SDK 36
-        run: yes | sdkmanager "platforms;android-36" "build-tools;36.0.0"
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
       - name: Install dependencies
         run: npm ci
       - name: Run checks and tests
@@ -54,6 +55,7 @@ jobs:
         working-directory: apps/web/android
         run: |
           set -o pipefail
+          chmod +x ./gradlew
           ./gradlew assembleDebug --stacktrace 2>&1 | tee ../../../artifacts/android-build.log
       - name: Record artifact checksums
         if: success()
