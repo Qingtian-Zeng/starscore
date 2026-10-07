@@ -8,12 +8,14 @@
 | 新增回归 | 12 星座、6 素材、7 星云、分享快照、坏文件保护、音频清理通过 |
 | 交接 DOM | 默认银河、进入动画、导航、来源返回、保存失败、HTML 离线包通过 |
 | 浏览器 390×844 | 默认银河、无横向溢出、素材副本、规则 A/B、社区来源返回通过 |
-| Android 云构建 | 待本次提交 Actions 结果 |
+| Android 云构建 | run 37586957868 通过；aapt 元数据与 apksigner v2 验签通过 |
 | 模拟器/真机 | 未执行 |
 | 人工听感/DAW | 未执行 |
 | 真实 AI | 无模型配置，未执行；规则来源为 `rules` |
 
 纯 DOM/模拟音频不能替代真机、声音主观评价或系统分享面板验收。
+
+发布证据：APK `com.starscore.app`、versionCode 2、versionName 0.2.0、minSdk 24、targetSdk 36；大小 5,461,302 字节；SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。公开仓库、Release 和 APK 匿名请求均返回 HTTP 200，匿名下载哈希一致。签名为 CI Android Debug RSA 2048、APK Signature Scheme v2；不是生产 release keystore。
 
 ## 交付验证增量（2026-10-06）
 
