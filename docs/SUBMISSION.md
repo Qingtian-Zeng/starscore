@@ -1,5 +1,14 @@
 # StarScore 参赛提交资料
 
+## v0.2.1 最终链接
+
+- 仓库：https://github.com/Qingtian-Zeng/starscore
+- Release：https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui
+- APK：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore-v0.2.1-confirmed-ui-debug.apk
+- HTML：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore_Interactive_Preview-v0.2.1.html
+- Actions：https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397
+- APK SHA-256：`9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`
+
 ## 一句话介绍
 
 星谱把点星、旋律回应和人与人的音乐相遇放进同一片可演奏银河：听见一团星云，带走一段灵感，再把自己的作品分享出去。

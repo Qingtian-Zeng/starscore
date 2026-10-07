@@ -1,5 +1,19 @@
 # StarScore QA 记录
 
+## v0.2.1 实际验证（2026-10-07）
+
+| 项目 | 结果 |
+|---|---|
+| 确认界面参数 | CI 守卫通过；附件 SHA 与参数快照已记录 |
+| 本地 build/check | 通过；core 11、API 3、Web 1，共 15 项测试通过 |
+| 浏览器 | 已有“夜航”作品恢复；8 个音高标签默认隐藏；离线 A/B 各 6 颗回应星 |
+| 目录/银河/音频回归 | 通过 |
+| Compose | Web、同源 health、规则回应 smoke 通过 |
+| Android | assembleDebug、aapt、apksigner v2 通过 |
+| 匿名下载 | 仓库/Release/APK HTTP 200；大小和 SHA-256 一致 |
+
+APK 为 5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`。真机安装、系统分享、人工听感、外部 DAW、真实模型和公网 HTTPS 未验证。
+
 ## v0.2.0 增量结果（2026-10-07）
 
 | 环境 | 结果 |
