@@ -1,5 +1,15 @@
 # 星谱开发进度
 
+## v0.2.0 银河相遇版（2026-10-07，当前）
+
+- 已合并默认银河、7 位示例居民/14 段星谱、12 星座、6 素材、试听收藏筛选、灵感副本和来源返回。
+- 已增加本机星云发布、关注/喜欢、好友星系导入导出与严格校验；准确边界为本机社区 + 文件交换。
+- 正式 Web/App 的规则回应可离线工作；真实模型仍走 API。静态下载不依赖 API，Android 星系导出使用系统分享。
+- 保持 `com.starscore.app`、IndexedDB `starscore` 和项目 schema；Android 版本为 0.2.0 / versionCode 2。
+- build、check、目录/银河/音频回归、独立 HTML、交接导航/HTML 检查均通过。
+- 390×844 浏览器验证默认银河无横向溢出、素材独立副本、离线规则 A/B、社区具体来源路由通过。
+- 云端 APK 与 Release 证据发布后追加；真机、真实 AI、人工听感和 DAW 尚未执行。
+
 ## 交付验证阶段（2026-10-06）
 
 - 新增可手动触发的 GitHub Actions：Ubuntu 24.04、Node 24、Temurin JDK 21、Android SDK 36，执行 `npm ci`、check、Web build、品牌密度资源生成、Capacitor sync、`assembleDebug`，上传 APK、SHA-256、构建日志与检查日志。

@@ -1,5 +1,13 @@
 # StarScore Android 测试版构建
 
+## v0.2.0 当前构建基线（2026-10-07）
+
+- 应用 ID `com.starscore.app`；versionName `0.2.0`；versionCode `2`；minSdk 24；compile/target SDK 36。
+- Android APK 由 Ubuntu 24.04 + JDK 21 的 Actions 生成；本地已完成 Web 构建与检查。
+- 本次仍是 CI 默认 debug 签名测试包；没有稳定 release keystore，因此不能保证跨 CI 运行覆盖安装。升级前应导出 JSON/星系文件备份本机作品。
+- 正式数据库仍为 IndexedDB `starscore`，未切换到 HTML 预览数据库。
+- 最终 Actions run、APK 路径、大小、SHA-256 和签名摘要在 Release 完成后记录。
+
 ## GitHub Actions 云端构建
 
 工作流 `.github/workflows/delivery-build.yml` 通过 GitHub Actions 的 `workflow_dispatch` 手动触发。可选输入 `app_api_url` 必须是 APK 真机可访问的 HTTPS API；留空时规则/模型接口在 APK 中没有远程服务可用。

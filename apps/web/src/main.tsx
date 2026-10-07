@@ -3,4 +3,6 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import "./styles/tokens.css";
 import "./styles/global.css";
+import { installPreviewBridge } from "./preview/bridge";
+installPreviewBridge();
 createRoot(document.getElementById("root")!).render(<StrictMode><App /></StrictMode>);

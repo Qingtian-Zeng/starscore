@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="星谱 StarScore 可交互 HTML 预览。复用已发布 App 的星图、乐谱、播放与文件交换逻辑，实时调整界面并保存为 HTML。">
+<title>星谱 · 交互预览工作台</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#eaf0f8;background:#0a101a;--accent:#65e6e2;--muted:#8191a7;--border:#233044}
+*{box-sizing:border-box}body{margin:0;min-width:340px}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button:disabled{cursor:not-allowed;opacity:.4}a{color:inherit}.shell{height:100dvh;min-height:620px;display:grid;grid-template-columns:minmax(0,1fr) 290px;grid-template-rows:70px minmax(0,1fr) 36px}
+.toolbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--border);background:#101824;gap:20px;z-index:3}.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}.logo-mark{width:34px;height:34px;display:grid;place-items:center;color:var(--accent);border:1px solid #34505a;border-radius:10px;background:#162b34}.logo strong{font-size:16px;letter-spacing:.02em}.logo small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em;margin-top:3px}.nav{display:flex;align-items:center;padding:4px;background:#0b121e;border:1px solid #202c3d;border-radius:10px;gap:3px}.nav button{border:0;border-radius:7px;background:transparent;color:#899aaf;padding:8px 14px;font-size:12px}.nav button.active{color:#e5faff;background:#243848;box-shadow:0 2px 8px #0003}.actions{display:flex;align-items:center;gap:8px}.button{min-height:34px;border:1px solid #2a384b;border-radius:8px;padding:0 12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#172231;color:#c8d6e5;font-size:12px;text-decoration:none;white-space:nowrap}.button.primary{border-color:#3b756f;background:#183b3c;color:#b0fff4}.button.icon{padding:0;width:34px}.ico{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.stage{min-width:0;min-height:0;display:flex;flex-direction:column;padding:18px 22px 16px;background:radial-gradient(ellipse at 44% 18%,#182436 0%,#0e1520 48%,#0a1018 100%);position:relative}.stage-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:37px;margin-bottom:15px}.stage-label{display:flex;align-items:center;gap:8px;color:#93a4b9;font-size:11px;letter-spacing:.03em}.live{width:6px;height:6px;background:#69cdbd;border-radius:50%;box-shadow:0 0 10px #69cdbd50}.viewport-buttons{display:flex;gap:4px}.viewport-buttons button{height:30px;border:1px solid transparent;border-radius:7px;background:transparent;color:#8495a9;padding:0 9px;display:flex;align-items:center;gap:5px;font-size:11px}.viewport-buttons button.active{border-color:#355064;background:#1b2c3c;color:#d5e7f5}.viewport-buttons .ico{width:14px;height:14px}.viewport-space{min-height:0;flex:1;position:relative;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:9px 12px 12px;scrollbar-color:#304156 #101722;scrollbar-width:thin}.frame-sizer{flex:none;position:relative}.device-frame{position:absolute;left:0;top:0;transform-origin:top left;overflow:hidden;border-radius:14px;background:#07111f;box-shadow:0 25px 70px #0007,0 0 0 1px #314257}.device-frame.phone{border-radius:30px;box-shadow:0 25px 70px #0008,0 0 0 7px #172231,0 0 0 8px #344358}.device-frame.tablet{border-radius:22px}iframe{border:0;display:block;width:100%;height:100%;background:#07111f}.loading{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:9px;color:#8ca4ba;pointer-events:none;font-size:12px}.loading strong{font-size:22px;color:#c9fffa;letter-spacing:.12em}.frame-bottom{display:flex;align-items:center;justify-content:space-between;color:#62758d;font-size:10px;min-height:28px;margin:12px 3px 0;gap:12px}.frame-bottom .hint-text{max-width:75%;line-height:1.5}.zoom{display:flex;align-items:center;gap:5px}.zoom button{border:1px solid #26384e;border-radius:6px;background:#121d2a;color:#8ca2b9;font-size:10px;padding:4px 7px}.zoom button.active{color:#b2f2eb;border-color:#3c655f}.panel{min-height:0;overflow-y:auto;border-left:1px solid var(--border);background:#111a27;scrollbar-color:#2d3e52 #111a27;scrollbar-width:thin}.panel-head{position:sticky;top:0;background:#111a27f5;backdrop-filter:blur(8px);padding:19px 20px 15px;border-bottom:1px solid #233044;z-index:2;display:flex;justify-content:space-between;align-items:center}.panel-head h2{margin:0;font-size:14px;font-weight:600}.panel-head span{font-size:10px;color:#69bdb2;border:1px solid #294a48;background:#162b2d;border-radius:99px;padding:3px 7px}.section{padding:18px 20px;border-bottom:1px solid #233044}.section h3{font-size:11px;color:#aabace;letter-spacing:.07em;margin:0 0 14px;font-weight:600}.section p{font-size:11px;color:#7f93aa;line-height:1.7;margin:0}.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.preset{border:1px solid #2a3a4e;border-radius:8px;padding:8px 4px;background:#152131;color:#94a8bc;font-size:10px}.preset.active{border-color:#4b7974;color:#c6fff5}.preset i{display:block;margin:0 auto 7px;width:31px;height:20px;border-radius:5px;border:1px solid #49617b;position:relative;overflow:hidden}.preset i:after{content:"";position:absolute;left:10px;top:8px;width:3px;height:3px;border-radius:50%;background:#8ff5e7;box-shadow:8px -3px 0 #c1a7fa,-5px 5px 0 #8ff5e7}.preset[data-preset="app"] i{background:linear-gradient(120deg,#133455,#061221)}.preset[data-preset="immersive"] i{background:linear-gradient(120deg,#102029,#050b10)}.preset[data-preset="aurora"] i{background:linear-gradient(120deg,#163935,#091925)}.colors{display:grid;gap:13px}.color-row{display:flex;align-items:center;gap:9px;font-size:11px;color:#b6c6d8}.color-row>span:first-child{flex:1}.color-row output{color:#748da7;font-size:10px;font-family:ui-monospace,monospace}.color-row input{width:30px;height:28px;padding:0;border:0;background:transparent;cursor:pointer}.color-row input::-webkit-color-swatch-wrapper{padding:3px}.color-row input::-webkit-color-swatch{border-radius:5px;border:1px solid #fff2}.slider{margin-top:16px}.slider label{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#b4c5d8;margin-bottom:10px}.slider output{color:#8199b2;font-size:10px;font-family:ui-monospace,monospace}.slider input{width:100%;height:3px;accent-color:var(--accent);cursor:pointer;display:block}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#b6c6d8;padding:6px 0}.switch-row input{appearance:none;width:29px;height:17px;background:#2b384c;border:0;border-radius:99px;position:relative;cursor:pointer;transition:background .15s}.switch-row input:before{content:"";position:absolute;left:3px;top:3px;background:#94a6ba;width:11px;height:11px;border-radius:50%;transition:transform .15s}.switch-row input:checked{background:#285d58}.switch-row input:checked:before{transform:translateX(12px);background:#a4ffee}.panel-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.panel-actions .button{padding:0 5px;font-size:11px}.snapshot{display:grid;gap:9px;margin:0}.snapshot>div{display:flex;justify-content:space-between;gap:12px;font-size:11px}.snapshot dt{color:#70879f}.snapshot dd{margin:0;color:#b8cfe1;text-align:right;max-width:155px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.snapshot dd.good{color:#89dacb}.footer{grid-column:1/-1;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px;font-size:10px;color:#6f839a;background:#0e1622}.footer a{color:#9cb7ce;text-decoration:none}.footer span:last-child{font-family:ui-monospace,monospace;color:#536b85}.toast{position:fixed;bottom:54px;left:50%;transform:translateX(-50%) translateY(8px);max-width:calc(100vw - 32px);padding:12px 18px;border:1px solid #375c61;border-radius:11px;background:#15303bea;color:#c9fff6;box-shadow:0 8px 40px #0005;font-size:12px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:10}.toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}.panel-toggle{display:none}.panel-hidden .shell{grid-template-columns:minmax(0,1fr) 0}.panel-hidden .panel{display:none}
+@media(max-width:1100px){.toolbar{padding:0 16px;gap:10px}.logo small{letter-spacing:.08em}.nav button{padding:8px 10px}.actions .button:not(.primary) span{display:none}.actions .button:not(.primary){padding:0;width:34px}}
+@media(max-width:850px){.shell{grid-template-columns:minmax(0,1fr);grid-template-rows:62px minmax(0,1fr) 34px}.toolbar{padding:0 13px}.logo strong{font-size:14px}.logo small{font-size:9px}.nav{display:none}.actions .primary span{display:none}.actions .primary{padding:0;width:34px}.panel-toggle{display:inline-flex}.panel{display:none;position:fixed;right:0;top:62px;bottom:34px;width:290px;z-index:5;box-shadow:-20px 0 50px #0007}.panel-open .panel{display:block}.stage{padding:12px 12px 8px}.stage-head{margin-bottom:7px}.stage-label span:last-child{display:none}.viewport-buttons button{font-size:10px;padding:0 6px}.frame-bottom{margin-top:8px}.footer{padding:0 12px}.footer .source{display:none}.frame-bottom .hint-text{font-size:9px}}
+body{min-width:320px}
+.nav button{white-space:nowrap;padding:8px 11px}
+.nav .galaxy-nav,.nav .galaxy-nav.active{display:flex;align-items:center;gap:6px;min-height:34px;border:1px solid #b2a0e06b;background:radial-gradient(ellipse at 80% 100%,#79659b88,transparent 70%),linear-gradient(120deg,#302d50,#182238);color:#eee0ff;padding:8px 13px;margin-right:3px;box-shadow:0 0 15px #b99bdb12}.nav .galaxy-nav .ico{width:13px;height:13px}.nav .galaxy-nav.active{border-color:#d2b3f39c;background:linear-gradient(120deg,#62517d,#33445d)}
+@media(max-width:480px){
+  .logo{min-width:0;flex-shrink:1}.logo-mark{flex-shrink:0}.logo>div{min-width:0;overflow:hidden}.logo strong{display:block;font-size:13px;white-space:nowrap}.logo small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px}.actions{flex-shrink:0}
+  .stage-head{flex-wrap:wrap;gap:8px}.stage-label{width:100%}.viewport-buttons{width:100%;justify-content:space-between}.viewport-buttons button{white-space:nowrap}
+  .frame-bottom{justify-content:flex-end}.frame-bottom .hint-text{display:none}.zoom{flex-shrink:0}.footer>span:last-child{display:none}.footer>span:first-child{white-space:nowrap;font-size:9px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8L12 2Z"/><path d="m20 2 .6 2.4L23 5l-2.4.6L20 8l-.6-2.4L17 5l2.4-.6Z"/></symbol>
+<symbol id="i-desktop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4m-3 14h2"/></symbol>
+<symbol id="i-tablet" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M11 19h2"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 15v5h16v-5"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 3v6m8 0v6m-6 0v6"/></symbol>
+<symbol id="i-json" viewBox="0 0 24 24"><path d="M8 3H6a2 2 0 0 0-2 2v4l-2 3 2 3v4a2 2 0 0 0 2 2h2m8-18h2a2 2 0 0 1 2 2v4l2 3-2 3v4a2 2 0 0 1-2 2h-2"/></symbol>
+</defs></svg>
+<div class="shell">
+<header class="toolbar">
+  <div class="logo"><span class="logo-mark"><svg class="ico" style="width:21px;height:21px"><use href="#i-star"/></svg></span><div><strong>星谱 <span style="font-weight:400;color:#71869d">/ 交互预览</span></strong><small>STARSCORE · DESIGN PLAYGROUND</small></div></div>
+  <nav class="nav" aria-label="预览页面"><button class="galaxy-nav active" data-page="community"><svg class="ico"><use href="#i-star"/></svg>银河社区</button><button data-page="studio">星图画室</button><button data-page="zodiac">十二星座</button><button data-page="materials">星谱素材</button><button data-page="library">我的星系</button><button data-page="play">演奏页</button></nav>
+  <div class="actions"><button class="button" id="exportSettings"><svg class="ico"><use href="#i-json"/></svg><span>导出配置</span></button><button class="button primary" id="saveHtml"><svg class="ico"><use href="#i-download"/></svg><span>保存当前 HTML</span></button><button class="button icon panel-toggle" id="togglePanel" aria-label="界面调整"><svg class="ico"><use href="#i-sliders"/></svg></button></div>
+</header>
+<main class="stage">
+  <div class="stage-head"><div class="stage-label"><i class="live"></i><span id="pageLabel">银河社区</span><span id="modeLabel">· 星云相遇 · 本机体验</span></div><div class="viewport-buttons" aria-label="预览视口"><button data-viewport="auto" class="active">自适应</button><button data-viewport="desktop"><svg class="ico"><use href="#i-desktop"/></svg>桌面</button><button data-viewport="phone"><svg class="ico"><use href="#i-phone"/></svg>手机</button><button data-viewport="tablet"><svg class="ico"><use href="#i-tablet"/></svg>平板</button></div></div>
+  <div class="viewport-space" id="viewportSpace"><div class="frame-sizer" id="frameSizer"><div class="device-frame" id="deviceFrame"><iframe id="appFrame" title="星谱实际应用交互预览" allow="autoplay; clipboard-write"></iframe><div class="loading" id="loading"><strong>星谱</strong><span>正在点亮你的星图…</span></div></div></div></div>
+  <div class="frame-bottom"><span class="hint-text">点星云倾听彼此，进入画室继续创作；右侧可实时调整原有界面。</span><div class="zoom"><span id="dimensions">—</span><button id="fitButton" class="active">适应</button><button id="actualButton">1:1</button></div></div>
+</main>
+<aside class="panel" aria-label="实时界面调整">
+  <div class="panel-head"><h2>界面调整</h2><span>实时生效</span></div>
+  <section class="section"><h3>视觉预设</h3><div class="presets"><button class="preset active" data-preset="app"><i></i>默认 App</button><button class="preset" data-preset="immersive"><i></i>深空</button><button class="preset" data-preset="aurora"><i></i>极光</button></div></section>
+  <section class="section"><h3>色彩与布局</h3><div class="colors"><label class="color-row"><span>原旋律</span><output id="accentValue">#65E6E2</output><input id="accent" type="color" value="#65e6e2" aria-label="原旋律颜色"></label><label class="color-row"><span>回应旋律</span><output id="responseValue">#BFA2F6</output><input id="response" type="color" value="#bfa2f6" aria-label="回应旋律颜色"></label></div>
+  <div class="slider"><label for="canvasHeight">画布高度 <output id="canvasHeightValue">560 px</output></label><input id="canvasHeight" type="range" min="360" max="720" step="10" value="560"></div>
+  <div class="slider"><label for="starSize">星点大小 <output id="starSizeValue">1.00×</output></label><input id="starSize" type="range" min="0.7" max="1.8" step="0.05" value="1"></div>
+  <div class="slider"><label for="radius">面板圆角 <output id="radiusValue">28 px</output></label><input id="radius" type="range" min="12" max="40" step="1" value="28"></div>
+  <div class="slider"><label for="linkOpacity">连线亮度 <output id="linkOpacityValue">42%</output></label><input id="linkOpacity" type="range" min="0.15" max="0.85" step="0.05" value="0.42"></div>
+  </section>
+  <section class="section"><h3>内容与功能面板</h3>
+    <label class="switch-row">音高标注<input id="showPitch" type="checkbox"></label>
+    <label class="switch-row">背景星点<input id="showBackground" type="checkbox" checked></label>
+    <label class="switch-row">画布操作提示<input id="showHints" type="checkbox" checked></label>
+    <label class="switch-row">键盘音符列表<input id="showNoteList" type="checkbox" checked></label>
+    <label class="switch-row">音符编辑面板<input id="showInspector" type="checkbox" checked></label>
+    <label class="switch-row">低音与节奏面板<input id="showTracks" type="checkbox" checked></label>
+    <label class="switch-row">回应候选面板<input id="showResponses" type="checkbox" checked></label>
+  </section>
+  <section class="section"><h3 id="snapshotHeading">当前作品</h3><dl class="snapshot"><div><dt>作品名称</dt><dd id="projectTitle">夜航</dd></div><div><dt id="snapshotNotesLabel">原旋律 / 回应</dt><dd id="projectNotes">6 / 0 颗星</dd></div><div><dt id="snapshotBeatsLabel">原旋律时值</dt><dd id="projectBeats">8 / 8 拍</dd></div><div><dt>演奏状态</dt><dd id="playState" class="good">准备就绪</dd></div><div><dt id="snapshotSourceLabel">回应来源</dt><dd id="responseSource">尚未采用</dd></div></dl></section>
+  <section class="section"><h3>保存本次修改</h3><p>外观调整自动保存在此浏览器。保存当前 HTML 可以分享这一版界面；项目 JSON 可以继续导入 App。</p><div class="panel-actions"><button class="button" id="importSettings">导入配置</button><button class="button" id="resetSettings">恢复默认</button></div><input id="settingsFile" type="file" accept="application/json,.json" hidden></section>
+</aside>
+<footer class="footer"><span>基于已发布 App · v0.1.0-hackathon <span class="source">· <a href="https://github.com/Qingtian-Zeng/starscore" target="_blank" rel="noopener">源码</a></span></span><span>HTML 修改确认后可同步到 App 工程</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script id="preview-settings" type="application/json">__PREVIEW_SETTINGS__</script>
+<script id="app-source" type="application/json">__APP_DOCUMENT__</script>
+<script id="third-party-notices" type="text/plain">__THIRD_PARTY_NOTICES__</script>
+<script>
+(() => {
+  const defaults={theme:'navy',accent:'#65e6e2',response:'#bfa2f6',canvasHeight:560,starSize:1,radius:28,linkOpacity:.42,showPitch:false,showBackground:true,showHints:true,showNoteList:true,showInspector:true,showTracks:true,showResponses:true,viewport:'auto'};
+  const $=id=>document.getElementById(id);
+  const storageKey='starscore-preview-appearance-v1:'+location.pathname;
+  function validate(value){
+    const out={};if(!value||typeof value!=='object')return out;
+    for(const key of ['accent','response'])if(/^#[a-f0-9]{6}$/i.test(value[key]||''))out[key]=value[key];
+    if(['navy','ink','aurora'].includes(value.theme))out.theme=value.theme;
+    if(['auto','desktop','phone','tablet'].includes(value.viewport))out.viewport=value.viewport;
+    for(const [key,min,max] of [['canvasHeight',360,720],['starSize',.7,1.8],['radius',12,40],['linkOpacity',.15,.85]])if(typeof value[key]==='number'&&Number.isFinite(value[key]))out[key]=Math.max(min,Math.min(max,value[key]));
+    for(const key of Object.keys(defaults).filter(key=>key.startsWith('show')))if(typeof value[key]==='boolean')out[key]=value[key];
+    return out;
+  }
+  const embedded=validate(JSON.parse($('preview-settings').textContent));
+  let cached={};try{cached=validate(JSON.parse(localStorage.getItem(storageKey)||'{}'));}catch{}
+  let settings={...defaults,...embedded,...cached},ready=false,fit=true,toastTimer=0,lastProject=null;
+  const frame=$('appFrame');
+  const send=(type,value)=>frame.contentWindow?.postMessage({type,value},'*');
+  const persist=()=>{try{localStorage.setItem(storageKey,JSON.stringify(settings));}catch{}};
+  function toast(message){$('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),3000);}
+  function renderControls(){
+    for(const key of ['accent','response','canvasHeight','starSize','radius','linkOpacity'])$(key).value=settings[key];
+    for(const key of Object.keys(defaults).filter(key=>key.startsWith('show')))$(key).checked=settings[key];
+    $('accentValue').textContent=settings.accent.toUpperCase();$('responseValue').textContent=settings.response.toUpperCase();
+    $('canvasHeightValue').textContent=settings.canvasHeight+' px';$('radiusValue').textContent=settings.radius+' px';$('starSizeValue').textContent=settings.starSize.toFixed(2)+'×';$('linkOpacityValue').textContent=Math.round(settings.linkOpacity*100)+'%';
+    document.querySelectorAll('[data-viewport]').forEach(button=>button.classList.toggle('active',button.dataset.viewport===settings.viewport));
+    document.querySelectorAll('[data-preset]').forEach(button=>button.classList.toggle('active',({app:'navy',immersive:'ink',aurora:'aurora'})[button.dataset.preset]===settings.theme));
+    document.documentElement.style.setProperty('--accent',settings.accent);
+  }
+  function layout(){
+    const box=$('viewportSpace');const availableWidth=Math.max(240,box.clientWidth-32);const availableHeight=Math.max(400,box.clientHeight-24);
+    let width=Math.max(320,availableWidth),height=availableHeight;
+    if(settings.viewport==='desktop'){width=1440;height=900;}if(settings.viewport==='phone'){width=390;height=844;}if(settings.viewport==='tablet'){width=768;height=1024;}
+    const scale=fit?Math.min(1,availableWidth/width,availableHeight/height):1;
+    $('frameSizer').style.width=width*scale+'px';$('frameSizer').style.height=height*scale+'px';
+    $('deviceFrame').style.width=width+'px';$('deviceFrame').style.height=height+'px';$('deviceFrame').style.transform='scale('+scale+')';
+    $('deviceFrame').className='device-frame '+settings.viewport;
+    $('dimensions').textContent=Math.round(width)+' × '+Math.round(height)+' · '+Math.round(scale*100)+'%';
+    $('fitButton').classList.toggle('active',fit);$('actualButton').classList.toggle('active',!fit);
+  }
+  function apply(){renderControls();persist();if(ready)send('starscore:appearance',settings);layout();}
+  window.addEventListener('message',event=>{
+    if(event.source!==frame.contentWindow||!event.data)return;
+    const data=event.data;
+    if(data.type==='starscore:ready'){ready=true;$('loading').style.display='none';send('starscore:appearance',settings);}
+    if(data.type==='starscore:route'){
+      const hash=String(data.hash);const name=hash.startsWith('#/discover/zodiac')?'zodiac':hash.startsWith('#/discover/materials')?'materials':hash.startsWith('#/library')?'library':hash.startsWith('#/community')?'community':hash.startsWith('#/play/')?'play':'studio';
+      const labels={studio:'星图画室',zodiac:'十二星座',materials:'星谱素材',library:'我的星系',community:'银河社区',play:'演奏页'};
+      const from=new URLSearchParams(hash.includes('?')?hash.slice(hash.indexOf('?')+1):'').get('from');
+      const source=(name==='studio'||name==='play')&&['zodiac','materials','library','community'].includes(from)?from:null;
+      $('pageLabel').textContent=source?labels[source]+(name==='play'?' · 演奏':' · 创作'):labels[name];
+      $('modeLabel').textContent=name==='zodiac'||name==='materials'?'· 原创星谱素材':name==='community'?'· 星云相遇 · 本机体验':source?'· '+({zodiac:'主题创作',materials:'灵感创作',library:'作品编辑',community:'星云回应'}[source]):'· 本地规则演示';
+      document.querySelectorAll('[data-page]').forEach(button=>button.classList.toggle('active',button.dataset.page===(source||name)));
+      $('playState').textContent='准备就绪';
+    }
+    if(data.type==='starscore:project'){
+      $('snapshotHeading').textContent='当前作品';$('snapshotNotesLabel').textContent='原旋律 / 回应';$('snapshotBeatsLabel').textContent='原旋律时值';$('snapshotSourceLabel').textContent='回应来源';
+      lastProject=data.project;const notes=lastProject.tracks.lead.events;const originals=notes.filter(n=>n.origin==='user');
+      $('projectTitle').textContent=lastProject.title;$('projectNotes').textContent=originals.length+' / '+(notes.length-originals.length)+' 颗星';
+      $('projectBeats').textContent=originals.reduce((sum,n)=>sum+n.durationTick,0)/480+' / 8 拍';
+      $('playState').textContent=data.playing?'正在演奏':'准备就绪';$('responseSource').textContent=lastProject.responseMeta?.provider==='model'?'真实模型':lastProject.responseMeta?.candidateId?.startsWith('catalog-')?'预设素材':lastProject.responseMeta?'本地规则':'尚未采用';
+    }
+    if(data.type==='starscore:catalog'){
+      $('snapshotHeading').textContent='曲库与试听';$('snapshotNotesLabel').textContent='曲库素材';$('snapshotBeatsLabel').textContent='乐谱规格';$('snapshotSourceLabel').textContent='内容来源';
+      $('projectTitle').textContent=data.title||(data.kind==='zodiac'?'十二星座主题曲':'星谱灵感素材');$('projectNotes').textContent=data.total+' 段原创星谱';$('projectBeats').textContent='四小节 · 90 BPM';$('playState').textContent=data.starting?'启动音频':data.playing?'正在试听':'选择一段试听';$('responseSource').textContent='原创预设';
+    }
+    if(data.type==='starscore:community'){
+      $('snapshotHeading').textContent='银河与共鸣';$('snapshotNotesLabel').textContent='银河居民';$('snapshotBeatsLabel').textContent='可听星谱';$('snapshotSourceLabel').textContent='分享方式';
+      $('projectTitle').textContent=data.title||'同一片银河';$('projectNotes').textContent=data.galaxies+' 团星云';$('projectBeats').textContent=data.works+' 段星谱';$('playState').textContent=data.starting?'接收声音':data.playing?'正在倾听':'等待星云相遇';$('responseSource').textContent='本机体验 · 星系文件';
+    }
+    if(data.type==='starscore:error')toast(data.message);
+  });
+  for(const key of ['accent','response','canvasHeight','starSize','radius','linkOpacity'])$(key).addEventListener('input',event=>{settings[key]=['accent','response'].includes(key)?event.target.value:Number(event.target.value);apply();});
+  for(const key of Object.keys(defaults).filter(key=>key.startsWith('show')))$(key).addEventListener('change',event=>{settings[key]=event.target.checked;apply();});
+  document.querySelectorAll('[data-viewport]').forEach(button=>button.addEventListener('click',()=>{settings.viewport=button.dataset.viewport;apply();}));
+  document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>{send('starscore:navigate',button.dataset.page);document.body.classList.remove('panel-open');}));
+  const presets={app:{...defaults},immersive:{...defaults,theme:'ink',accent:'#88e7ef',response:'#bba9ff',canvasHeight:640,radius:18,linkOpacity:.3,showHints:false,showNoteList:false},aurora:{...defaults,theme:'aurora',accent:'#a2e8ca',response:'#efc39c',canvasHeight:590,radius:32,linkOpacity:.55,showPitch:true}};
+  document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{settings={...presets[button.dataset.preset],viewport:settings.viewport};apply();toast('已应用视觉预设，作品继续保留。');}));
+  $('fitButton').onclick=()=>{fit=true;layout();};$('actualButton').onclick=()=>{fit=false;layout();};$('togglePanel').onclick=()=>document.body.classList.toggle('panel-open');
+  $('resetSettings').onclick=()=>{settings={...defaults,viewport:settings.viewport};apply();toast('界面已恢复默认。');};
+  function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type}));const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+  $('exportSettings').onclick=()=>{const payload={kind:'StarScorePreviewAppearance',version:1,baseTag:'v0.1.0-hackathon',baseCommit:'b5f0331cb134df8fd087b9ae2ccf9d4a55c8d39a',appearance:settings};download(JSON.stringify(payload,null,2),'application/json','StarScore-appearance.json');toast('界面配置已导出。');};
+  $('importSettings').onclick=()=>$('settingsFile').click();
+  $('settingsFile').onchange=async event=>{
+    const file=event.target.files[0];event.target.value='';if(!file)return;
+    try{if(file.size>100000)throw new Error('配置文件过大。');const payload=JSON.parse(await file.text());if(payload.kind!=='StarScorePreviewAppearance'||payload.version!==1||!payload.appearance)throw new Error('请选择从预览工作台导出的界面配置。');settings={...defaults,...validate(payload.appearance)};apply();toast('已载入界面配置。');}catch(error){toast(error.message||'配置读取失败。');}
+  };
+  $('saveHtml').onclick=()=>{
+    const clone=document.documentElement.cloneNode(true);const child=clone.querySelector('#appFrame');child.removeAttribute('srcdoc');child.removeAttribute('src');
+    clone.querySelector('#preview-settings').textContent=JSON.stringify(settings);
+    clone.querySelector('#loading').removeAttribute('style');clone.querySelector('#toast').classList.remove('visible');clone.querySelector('#toast').textContent='';
+    clone.querySelector('body').classList.remove('panel-open');
+    const name='StarScore-preview-'+new Date().toISOString().replace(/[:.]/g,'-').slice(0,19)+'.html';
+    download('<!doctype html>\n'+clone.outerHTML,'text/html;charset=utf-8',name);toast('当前界面已保存为可独立打开的 HTML。');
+  };
+  new ResizeObserver(layout).observe($('viewportSpace'));
+  window.addEventListener('resize',layout);
+  frame.srcdoc=JSON.parse($('app-source').textContent);
+  apply();
+})();
+</script>
+</body>
+</html>

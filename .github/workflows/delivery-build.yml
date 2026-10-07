@@ -43,10 +43,16 @@ jobs:
           mkdir -p artifacts
           set -o pipefail
           npm run check 2>&1 | tee artifacts/check.log
+      - name: Verify catalog, galaxy and audio lifecycle
+        run: |
+          set -o pipefail
+          node scripts/check-catalog.mjs 2>&1 | tee artifacts/catalog-check.log
       - name: Build Web
         run: |
           set -o pipefail
           npm run build 2>&1 | tee artifacts/web-build.log
+      - name: Build standalone competition preview
+        run: node scripts/build-standalone.mjs artifacts/StarScore_Interactive_Preview.html
       - name: Generate branded Android icon and splash resources
         working-directory: apps/web
         run: |

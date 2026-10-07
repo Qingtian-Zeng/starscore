@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { CircleStop, Download, FileMusic, FolderOpen, Play, Plus, Redo2, Save, Sparkles, Undo2, Upload, Presentation } from "lucide-react";
+import { ArrowLeft, CircleStop, Download, FileMusic, FolderOpen, Play, Plus, Redo2, Save, Sparkles, Undo2, Upload, Presentation } from "lucide-react";
 import { acceptedResponseNotes, applyResponseCandidate, createBlankProject, createNightSailProject, createResponseRequest, exportProjectJson, importProjectJson, pitchNames, userNotes, type ResponseCandidate, type ResponsePayload, type ResponseProvider } from "@starscore/core";
 import { audioEngine } from "../audio/AudioEngine";
 import { StarCanvas } from "./StarCanvas";
@@ -14,8 +14,11 @@ import { ResponsePanel } from "./ResponsePanel";
 import { MotionToggle } from "../components/MotionToggle";
 import { AccessibleNoteList } from "../components/AccessibleNoteList";
 import { isNativeApp, shareProjectFile } from "../platform/files";
+import { publishPreviewProject } from "../preview/bridge";
+import { AppNavigation } from "../components/AppNavigation";
+import { projectOrigins, projectRoute, type ProjectOrigin } from "../navigation/projectRoutes";
 
-export function StudioPage({projectId,blank,navigate}:{projectId?:string;blank?:boolean;navigate:(hash:string)=>void}) {
+export function StudioPage({projectId,blank,origin,originGalaxyId,navigate}:{projectId?:string;blank?:boolean;origin?:ProjectOrigin;originGalaxyId?:string;navigate:(hash:string)=>void}) {
   const [state, dispatch] = useReducer(studioReducer, blank?createBlankProject():createNightSailProject(), initialStudioState);
   const [playing, setPlaying] = useState(false); const [activeId, setActiveId] = useState<string | null>(null); const [progress, setProgress] = useState(0); const [audioError, setAudioError] = useState(false);
   const [loadStatus,setLoadStatus]=useState<"ready"|"loading"|"missing"|"error">(projectId?"loading":"ready");
@@ -23,6 +26,9 @@ export function StudioPage({projectId,blank,navigate}:{projectId?:string;blank?:
   const lastAuditionAt = useRef(0);
   const requestController=useRef<AbortController|null>(null); const projectRef=useRef(state.project); projectRef.current=state.project;
   const importInput = useRef<HTMLInputElement>(null);
+  const leaving=useRef(false);const [leavingPage,setLeavingPage]=useState(false);
+  const source=origin?projectOrigins[origin]:undefined;
+  const returnTo=origin==="community"&&originGalaxyId?{...projectOrigins.community,hash:`#/community/${encodeURIComponent(originGalaxyId)}`}:source??projectOrigins.library;
   const notes = userNotes(state.project);
   const selected = useMemo(() => notes.find(note => note.id === state.selectedId), [notes, state.selectedId]);
   const stop = () => { audioEngine.stop(); setPlaying(false); setActiveId(null); setProgress(0); };
@@ -43,8 +49,18 @@ export function StudioPage({projectId,blank,navigate}:{projectId?:string;blank?:
   useEffect(()=>{let active=true;if(blank){setLoadStatus("ready");dispatch({type:"load",project:createBlankProject(),message:"空白星图已准备好，可以点亮第一颗星。"});return;}if(projectId){setLoadStatus("loading");getProject(projectId).then(project=>{if(!active)return;if(project){setLoadStatus("ready");dispatch({type:"load",project,message:"已从本机作品库打开。"})}else{setLoadStatus("missing");dispatch({type:"message",message:"没有找到这个本地作品。当前示例仍保留，可前往我的星系或导入 JSON。"})}}).catch(()=>{setLoadStatus("error");dispatch({type:"message",message:"读取本地作品失败，当前内存稿仍保留；请前往我的星系重试。"})});}return()=>{active=false}},[projectId,blank]);
   const edit = (action: Parameters<typeof dispatch>[0]) => { stop(); dispatch(action); };
   const remainingTicks = 3840 - notes.reduce((sum,note)=>sum+note.durationTick,0);
+  useEffect(()=>{publishPreviewProject(state.project,playing)},[state.project,playing]);
   const selectStar = (id:string) => { if (state.reconnectFromId) edit({type:"reconnectComplete",id}); else { dispatch({type:"select",id}); void audition(id); } };
-  const save=async()=>{try{await saveProject(state.project);dispatch({type:"message",message:"已保存到这台设备。"});if(projectId!==state.project.id)navigate(`#/studio/${state.project.id}`);}catch{dispatch({type:"message",message:"保存失败，内存稿仍保留；你仍可导出 JSON。"})}};
+  const save=async()=>{try{await saveProject(state.project);dispatch({type:"message",message:"已保存到这台设备。"});if(projectId!==state.project.id)navigate(projectRoute("studio",state.project.id,origin,originGalaxyId));}catch{dispatch({type:"message",message:"保存失败，内存稿仍保留；你仍可导出 JSON。"})}};
+  const leaveStudio=async(hash:string)=>{
+    if(leaving.current)return;
+    leaving.current=true;setLeavingPage(true);stop();
+    try{if(loadStatus==="ready")await saveProject(projectRef.current);navigate(hash)}
+    catch{dispatch({type:"message",message:"作品暂时无法保存，请先导出 JSON，再返回或切换页面。"})}
+    finally{leaving.current=false;setLeavingPage(false)}
+  };
+  useEffect(()=>{const back=(event:Event)=>{event.preventDefault();void leaveStudio(returnTo.hash)};window.addEventListener("starscore:native-back",back);return()=>window.removeEventListener("starscore:native-back",back)},[returnTo.hash,loadStatus]);
+  const openPlayer=()=>leaveStudio(projectRoute("play",state.project.id,origin,originGalaxyId));
   const jsonDownload=useMemo(()=>{const name=`${safeFilename(state.project.title)}.starscore.json`;return{href:downloadHref(exportProjectJson(state.project),"application/json",name),name}},[state.project]);
   const midiDownload=useMemo(()=>{const name=`${safeFilename(state.project.title)}.mid`;return{href:downloadHref(exportProjectMidi(state.project),"audio/midi",name),name}},[state.project]);
   const native=isNativeApp();
@@ -58,11 +74,13 @@ export function StudioPage({projectId,blank,navigate}:{projectId?:string;blank?:
   const visibleResponse=responsePayload?.candidates.find(candidate=>candidate.id===activeCandidateId)?.notes??acceptedResponseNotes(state.project);
   return <div className="app">
     <header className="topbar"><div className="brand"><div className="brand-mark"><Sparkles size={21}/></div><div><h1>星谱</h1><small>STARSCORE</small></div></div>
-      <nav className="top-actions"><MotionToggle/><button className="new-button" onClick={()=>navigate("#/library")}><FolderOpen size={17}/>我的星系</button><button className="new-button" onClick={() => navigate("#/studio/new")}><Plus size={17}/>新建星图</button></nav>
+      <nav className="top-actions"><MotionToggle/><button className="new-button" onClick={()=>void leaveStudio("#/library")}><FolderOpen size={17}/>我的星系</button><button className="new-button" onClick={() => void leaveStudio("#/studio/new")}><Plus size={17}/>新建星图</button></nav>
     </header>
+    <AppNavigation active={origin??"studio"} nested={Boolean(origin)} navigate={hash=>void leaveStudio(hash)}/>
     <main className="workspace wide">
-      <div className="title-row"><div><p className="eyebrow">星图画室 · 用户旋律</p><input className="title-input" aria-label="作品名称" value={state.project.title} onChange={e=>dispatch({type:"rename",title:e.target.value})}/></div><div className="meta"><span>90 BPM</span><span>C 五声音阶</span><span>4 / 4</span></div></div>
-      <section className="file-toolbar" aria-label="作品与文件"><button onClick={()=>void save()}><Save size={17}/>保存</button><button onClick={()=>navigate(`#/play/${state.project.id}`)} disabled={loadStatus!=="ready"}><Presentation size={17}/>演奏页</button>{native?<button aria-label="分享 JSON" onClick={()=>void shareJson()}><Download size={17}/>JSON</button>:<a aria-label="JSON" href={jsonDownload.href} download={jsonDownload.name}><Download size={17}/>JSON</a>}<button onClick={()=>importInput.current?.click()}><Upload size={17}/>导入</button>{native?<button aria-label="分享 MIDI" onClick={()=>void shareMidi()}><FileMusic size={17}/>MIDI</button>:<a aria-label="MIDI" href={midiDownload.href} download={midiDownload.name}><FileMusic size={17}/>MIDI</a>}<input ref={importInput} hidden type="file" accept=".json,.starscore.json,application/json" onChange={e=>{void importFile(e.target.files?.[0]);e.currentTarget.value=""}}/></section>
+      <nav className="studio-return-row" aria-label="创作页返回导航"><button className="text-button studio-return" disabled={leavingPage} onClick={()=>void leaveStudio(returnTo.hash)}><ArrowLeft size={17}/>{leavingPage?"正在保存…":`返回${returnTo.label}`}</button><span>{source?.context??"自由创作"}</span></nav>
+      <div className="title-row"><div><p className="eyebrow">{source?`${source.label} · ${source.context}`:"星图画室 · 用户旋律"}</p><input className="title-input" aria-label="作品名称" value={state.project.title} onChange={e=>dispatch({type:"rename",title:e.target.value})}/></div><div className="meta"><span>90 BPM</span><span>C 五声音阶</span><span>4 / 4</span></div></div>
+      <section className="file-toolbar" aria-label="作品与文件"><button onClick={()=>void save()}><Save size={17}/>保存</button><button onClick={()=>void openPlayer()} disabled={loadStatus!=="ready"}><Presentation size={17}/>演奏页</button>{native?<button aria-label="分享 JSON" onClick={()=>void shareJson()}><Download size={17}/>JSON</button>:<a aria-label="JSON" href={jsonDownload.href} download={jsonDownload.name}><Download size={17}/>JSON</a>}<button onClick={()=>importInput.current?.click()}><Upload size={17}/>导入</button>{native?<button aria-label="分享 MIDI" onClick={()=>void shareMidi()}><FileMusic size={17}/>MIDI</button>:<a aria-label="MIDI" href={midiDownload.href} download={midiDownload.name}><FileMusic size={17}/>MIDI</a>}<input ref={importInput} hidden type="file" accept=".json,.starscore.json,application/json" onChange={e=>{void importFile(e.target.files?.[0]);e.currentTarget.value=""}}/></section>
       <div className="studio-grid"><div className="canvas-column"><section className="canvas-shell"><div className="hint">{state.reconnectFromId?"选择另一颗星，接到它后面":"拖高改音高 · 横移改构图"}</div><div className="counter">{notes.length} / 8 颗</div>
         <StarCanvas notes={notes} candidateNotes={visibleResponse} layout={state.project.layout.notes} selectedId={state.selectedId} activeId={activeId} progress={progress} reconnectFromId={state.reconnectFromId}
           onDragStart={()=>{stop();dispatch({type:"dragStart"})}} onDragCommit={()=>dispatch({type:"dragCommit"})} onSelect={selectStar}
@@ -78,7 +96,7 @@ export function StudioPage({projectId,blank,navigate}:{projectId?:string;blank?:
       <section className="controls" aria-label="播放控制">
         <div className="history-controls"><button className="small-icon" aria-label="撤销" disabled={!state.past.length} onClick={()=>edit({type:"undo"})}><Undo2 size={19}/></button><button className="small-icon" aria-label="重做" disabled={!state.future.length} onClick={()=>edit({type:"redo"})}><Redo2 size={19}/></button><div className="selection"><strong>{selected ? pitchNames[selected.pitch] : "尚未选中"}</strong>{selected ? `第 ${notes.indexOf(selected)+1} 颗 · ${selected.durationTick/480} 拍` : "点击星点查看音高"}</div></div>
         <div className="transport">{playing ? <button className="icon-button primary" onClick={stop} aria-label="停止"><CircleStop size={25}/></button> : <button className="icon-button primary" onClick={play} disabled={!notes.length} aria-label="从头播放"><Play size={25} fill="currentColor"/></button>}</div>
-        <div className="legend"><span className="legend-dot"/>青色 · 原旋律 <span className="legend-response"/>紫色 · 回应</div>
+        <div className="legend"><span className="legend-item"><span className="legend-dot" aria-hidden="true"/>原旋律</span><span className="legend-item"><span className="legend-response" aria-hidden="true"/>回应</span></div>
       </section>
     </main>
   </div>;

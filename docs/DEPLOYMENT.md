@@ -1,5 +1,13 @@
 # Web/API 部署
 
+## v0.2.0 部署说明（2026-10-07）
+
+正式 Web 默认同源 `/api`；Android 只有在真实可达 HTTPS API 存在时设置 `VITE_API_BASE_URL`。CORS 需允许实际来源。模型地址、名称、密钥和超时只放在 API 服务端。
+
+无 API 时，银河、素材、作品编辑、播放、IndexedDB、JSON/MIDI/星系文件下载和离线规则回应仍可用；只有真实模型不可用。独立 HTML 位于 `demos/StarScore_Interactive_Preview.html`，使用独立预览数据库，不等同线上部署或 App 数据。
+
+当前没有已授权公网 HTTPS 托管地址；Compose 与同源 API 继续由 delivery workflow smoke test 验证。
+
 ## 自动 smoke 验证
 
 `scripts/verify-deployment.mjs <base-url>` 验证 Web 首页、同源 `/api/health` 和规则回应 A/B。GitHub Actions 的 `containers` job 会执行 Compose、运行该脚本、上传 `compose-ps.txt`/`compose.log`，最后清理容器。

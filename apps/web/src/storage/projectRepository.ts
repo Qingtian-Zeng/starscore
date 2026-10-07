@@ -1,6 +1,6 @@
 import type { StarScoreProject } from "@starscore/core";
 
-const DB_NAME="starscore"; const DB_VERSION=1; const STORE="projects";
+const DB_NAME=window.__STARSCORE_HTML_PREVIEW__?"starscore-html-preview-v1":"starscore"; const DB_VERSION=1; const STORE="projects";
 function openDb():Promise<IDBDatabase>{return new Promise((resolve,reject)=>{const request=indexedDB.open(DB_NAME,DB_VERSION);request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains(STORE)){const store=db.createObjectStore(STORE,{keyPath:"id"});store.createIndex("updatedAt","updatedAt");}};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error??new Error("无法打开本地作品库"));});}
 function transaction<T>(mode:IDBTransactionMode,work:(store:IDBObjectStore,ok:(value:T)=>void,fail:(error:unknown)=>void)=>void):Promise<T>{return openDb().then(db=>new Promise<T>((resolve,reject)=>{const tx=db.transaction(STORE,mode);const fail=(error:unknown)=>{db.close();reject(error)};tx.onabort=()=>fail(tx.error??new Error("本地存储事务失败"));tx.onerror=()=>fail(tx.error??new Error("本地存储事务失败"));work(tx.objectStore(STORE),value=>{tx.oncomplete=()=>{db.close();resolve(value);}},fail);}));}
 export function saveProject(project:StarScoreProject):Promise<StarScoreProject>{const saved=structuredClone(project);return transaction("readwrite",(store,ok,fail)=>{const request=store.put(saved);request.onsuccess=()=>ok(saved);request.onerror=()=>fail(request.error);});}
