@@ -9,9 +9,9 @@
 | build/check/新增回归 | 已验证 |
 | 390×844 浏览器关键流程 | 已验证 |
 | Android versionCode 2 / versionName 0.2.0 | 已验证源码 |
-| GitHub Actions 新版 APK | 待本次提交运行 |
-| APK 下载、SHA-256、元数据 | 待云构建完成 |
-| debug 签名 | 计划交付；不是稳定 release 签名 |
+| GitHub Actions 新版 APK | 已验证；run 37586957868 |
+| APK 下载、SHA-256、元数据 | 已验证；匿名下载与云端哈希一致 |
+| debug 签名 | 已通过 apksigner v2 验签；不是稳定 release 签名 |
 | 模拟器/真机安装与系统分享 | 未验证 |
 | 真实模型、人工听感、外部 DAW | 未验证 |
 | 公网 HTTPS Web | 未部署；独立 HTML 可下载 |
@@ -23,11 +23,11 @@
 | core/API/Web build 与 check | 已验证 | 本地 `npm run build`、`npm run check` 通过；core 11、API 3、Web 1 个测试通过 |
 | 本地 API 健康/CORS | 已验证 | `/api/health` 返回 ok；Capacitor origin OPTIONS 204 |
 | GitHub Actions 配置 | 已验证 | `.github/workflows/delivery-build.yml` 已静态核对，包含 Ubuntu 24.04、JDK 21、SDK 36、检查、Web、资源、Capacitor 与 APK 步骤 |
-| GitHub Actions 实际运行 | 已验证 | [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 成功，APK 与构建证据已上传 |
+| GitHub Actions 实际运行 | 已验证 | [run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 成功，APK、校验、元数据、签名与构建证据已上传 |
 | 品牌 Android 密度资源 | 已验证 | 云端通过 `@capacitor/assets` 从 SVG 生成各密度资源并成功打包 |
-| APK 构建 | 已验证 | `assembleDebug` 成功；安装截图仍待模拟器/真机验证 |
+| APK 构建 | 已验证 | `assembleDebug`、`aapt dump badging`、`apksigner verify` 成功；匿名下载 5,461,302 字节且 SHA-256 为 `46a33c…3967`；安装截图仍待模拟器/真机验证 |
 | Compose 配置与 smoke 脚本 | 已验证 | 工作流与 `scripts/verify-deployment.mjs` 已配置；脚本覆盖 Web、同源 health、规则 A/B |
-| Compose 实际运行 | 已验证 | run 37472271902 的 Compose job 已通过 Web、health 与规则回应 smoke test |
+| Compose 实际运行 | 已验证 | run 37586957868 的 Compose job 已通过 Web、health 与规则回应 smoke test |
 | HTTPS 公网部署 | 受阻 | 未提供托管环境、域名或 TLS 配置 |
 | 真实模型接口 | 受阻 | 缺少 `STARSCORE_MODEL_BASE_URL`、`STARSCORE_MODEL_NAME`、`STARSCORE_MODEL_API_KEY` |
 | 规则候选流程 | 已验证 | 阶段 4–5 已验证 A/B、试听、采用、撤销、保存；来源为 rules |
