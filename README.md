@@ -1,5 +1,11 @@
 # 星谱 StarScore
 
+> **v0.2.1 已确认界面版**：已将 `StarScore-preview-2026-10-07T12-26-51.html` 的确认参数合并到正式 Web/App，保持作品数据结构与 IndexedDB `starscore` 不变。
+
+[v0.2.1 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui) · [下载 APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore-v0.2.1-confirmed-ui-debug.apk) · [确认版 HTML](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore_Interactive_Preview-v0.2.1.html) · [构建记录](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397)
+
+APK：5,461,350 字节；SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`；包名 `com.starscore.app`，versionName `0.2.1`，versionCode `3`。
+
 > **v0.2.0 银河相遇版**：默认进入 `#/community`，在本机银河中试听 7 位示例居民的 14 段原创星谱，创建灵感副本后继续作曲、生成回应并分享星系文件。
 
 [公开仓库](https://github.com/Qingtian-Zeng/starscore) · [v0.2.0 Galaxy Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) · [下载 Android APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk) · [独立 HTML 演示](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html)

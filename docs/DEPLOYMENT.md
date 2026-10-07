@@ -1,5 +1,9 @@
 # Web/API 部署
 
+## v0.2.1 部署验证（2026-10-07）
+
+[Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 已实际构建 Compose，并通过 Web、同源 `/api/health` 与规则回应 smoke。确认版独立 HTML 已作为 [Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore_Interactive_Preview-v0.2.1.html) 发布。当前仍未提供公网 HTTPS 托管地址；Release 下载不等同 Web/API 正式部署。
+
 ## v0.2.0 部署说明（2026-10-07）
 
 正式 Web 默认同源 `/api`；Android 只有在真实可达 HTTPS API 存在时设置 `VITE_API_BASE_URL`。CORS 需允许实际来源。模型地址、名称、密钥和超时只放在 API 服务端。

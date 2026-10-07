@@ -1,5 +1,14 @@
 # 星谱开发进度
 
+## v0.2.1 已确认界面版（2026-10-07，当前）
+
+- 确认 HTML SHA-256 为 `3a0887036391a6f99d7564795d4ef28b61821b2b3928cd243faae6a312d5b4b3`；参数快照见 `CONFIRMED_INTERFACE_20261007.json`。
+- 已修正正式 App 与确认稿的唯一默认差异：音高标签默认隐藏；仍可由独立预览开关显示。确认颜色、画布、圆角、星点、连线及功能面板状态均受 CI 守卫保护。
+- 保持 `com.starscore.app`、IndexedDB `starscore` 和项目 schema；Android 升至 versionName 0.2.1 / versionCode 3。
+- [Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 全部通过；[v0.2.1 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui) 已公开。
+- APK 5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`；匿名下载复算一致。
+- 真机、真实 AI、人工听感、外部 DAW 与公网 HTTPS 仍未执行。
+
 ## v0.2.0 银河相遇版（2026-10-07，当前）
 
 - 已合并默认银河、7 位示例居民/14 段星谱、12 星座、6 素材、试听收藏筛选、灵感副本和来源返回。
