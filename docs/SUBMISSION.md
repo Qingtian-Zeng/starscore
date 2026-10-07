@@ -2,6 +2,7 @@
 
 ## v0.2.1 最终链接
 
+- 在线 Demo：https://qingtian-zeng.github.io/starscore/
 - 仓库：https://github.com/Qingtian-Zeng/starscore
 - Release：https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui
 - APK：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore-v0.2.1-confirmed-ui-debug.apk
