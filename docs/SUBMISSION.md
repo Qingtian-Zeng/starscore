@@ -21,6 +21,10 @@ React 19、TypeScript、Vite、Tone.js、@tonejs/midi、IndexedDB、Fastify、Ca
 - 画室/作品库/演奏页：`#/studio`、`#/library`、`#/play/:id`
 - 离线演示：`demos/StarScore_Interactive_Preview.html`
 - 公开仓库：https://github.com/Qingtian-Zeng/starscore
+- Release：https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy
+- APK：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk
+- 独立 HTML：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html
+- 构建记录：https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868
 
 演示顺序：银河试听 → 灵感副本 → 编辑/伴奏 → 规则或模型回应 → 保存 → 发布/导出星系。
 
@@ -28,4 +32,4 @@ React 19、TypeScript、Vite、Tone.js、@tonejs/midi、IndexedDB、Fastify、Ca
 
 社区是示例居民 + 本机作品 + 导入好友文件，不包含账号、实时发现或跨设备同步。真实 AI 需要服务端配置；未配置时只显示 `rules`。当前 APK 是 debug 测试签名；真机、人工听感、外部 DAW 和公网 HTTPS 部署均单独记录。
 
-最终 Release、APK、SHA-256、Actions run 和静态网页下载链接在 v0.2.0 发布后回填。
+v0.2.0 Galaxy 已作为预发布公开。APK 为 5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`；云端 `aapt`/`apksigner` 验证、匿名 HTTP 200 下载及哈希复算均通过。

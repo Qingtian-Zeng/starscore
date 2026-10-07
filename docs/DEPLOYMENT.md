@@ -6,13 +6,13 @@
 
 无 API 时，银河、素材、作品编辑、播放、IndexedDB、JSON/MIDI/星系文件下载和离线规则回应仍可用；只有真实模型不可用。独立 HTML 位于 `demos/StarScore_Interactive_Preview.html`，使用独立预览数据库，不等同线上部署或 App 数据。
 
-当前没有已授权公网 HTTPS 托管地址；Compose 与同源 API 继续由 delivery workflow smoke test 验证。
+当前没有已授权公网 HTTPS 托管地址；Compose 与同源 API 已由 [delivery run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 实际构建并通过 smoke test。独立 HTML 已作为 [Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html) 公开下载，但它不是托管站点。
 
 ## 自动 smoke 验证
 
 `scripts/verify-deployment.mjs <base-url>` 验证 Web 首页、同源 `/api/health` 和规则回应 A/B。GitHub Actions 的 `containers` job 会执行 Compose、运行该脚本、上传 `compose-ps.txt`/`compose.log`，最后清理容器。
 
-本轮在现有本地 Web/API 进程上实际执行通过：HTTP 200、health ok、`modelConfigured:false`、rules A/B 各 6 音。GitHub Actions [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 的 Compose job 也已实际构建并通过相同 smoke test。没有可用托管环境，HTTPS 公网地址仍受阻。
+本轮在现有本地 Web/API 进程上实际执行通过：HTTP 200、health ok、`modelConfigured:false`、rules A/B 各 6 音。GitHub Actions run 37586957868 的 Compose job 也已实际构建并通过相同 smoke test。没有可用托管环境，HTTPS 公网地址仍受阻。
 
 ## Docker Compose
 

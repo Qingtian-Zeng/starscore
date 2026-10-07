@@ -8,7 +8,9 @@
 - 保持 `com.starscore.app`、IndexedDB `starscore` 和项目 schema；Android 版本为 0.2.0 / versionCode 2。
 - build、check、目录/银河/音频回归、独立 HTML、交接导航/HTML 检查均通过。
 - 390×844 浏览器验证默认银河无横向溢出、素材独立副本、离线规则 A/B、社区具体来源路由通过。
-- 云端 APK 与 Release 证据发布后追加；真机、真实 AI、人工听感和 DAW 尚未执行。
+- [最终 Actions run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 已通过：检查、Web、目录/音频回归、Compose、Capacitor、`assembleDebug`、APK 元数据与 v2 签名校验全部成功。
+- [v0.2.0 Galaxy 预发布](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) 已公开；APK 5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。匿名重新下载 HTTP 200 且哈希一致。
+- 真机、真实 AI、人工听感、外部 DAW 和公网 HTTPS 托管尚未执行；未以自动化结果冒充人工/设备验证。
 
 ## 交付验证阶段（2026-10-06）
 
@@ -16,7 +18,7 @@
 - 同一工作流增加 Compose smoke job，实际运行时会构建/启动容器，验证 Web 200、同源健康检查和两个 rules 候选，并上传 Compose 状态与日志。
 - 新增可本地或 CI 复用的 `scripts/verify-deployment.mjs`。本轮对现有 Web/API 进程实测通过：Web 200、health ok、规则候选 A/B 各 6 音。
 - 新增 `RELEASE_CHECKLIST.md` 和 `DEMO_SCRIPT.md`，所有交付项按已验证/待验证/受阻分类。
-- 当前目录没有 `.git` 或 GitHub 远端，无法实际 dispatch 工作流；本机无 Docker/JDK/Android SDK，模型三项环境变量也不存在。因此没有新增 APK、云端 run URL、Compose 容器日志、公网地址、安装截图、真机、真实 AI、人工听感或 DAW 证据。
+- 此处为 2026-10-06 的历史状态；2026-10-07 已建立公开仓库并完成云构建、Compose smoke 与 Release。当前仍没有公网 HTTPS 托管、安装截图、真机、真实 AI、人工听感或 DAW 证据。
 
 ## 阶段 6 状态（2026-10-06）
 
