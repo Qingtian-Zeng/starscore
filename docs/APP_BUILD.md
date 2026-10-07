@@ -6,7 +6,9 @@
 - Android APK 由 Ubuntu 24.04 + JDK 21 的 Actions 生成；本地已完成 Web 构建与检查。
 - 本次仍是 CI 默认 debug 签名测试包；没有稳定 release keystore，因此不能保证跨 CI 运行覆盖安装。升级前应导出 JSON/星系文件备份本机作品。
 - 正式数据库仍为 IndexedDB `starscore`，未切换到 HTML 预览数据库。
-- 最终 Actions run、APK 路径、大小、SHA-256 和签名摘要在 Release 完成后记录。
+- 最终 [Actions run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 通过；[Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) 已发布。
+- APK：[StarScore-v0.2.0-galaxy-debug.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk)，5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。
+- `aapt` 确认包名/版本/minSdk/targetSdk；`apksigner` 确认 v2 签名有效、1 个 Android Debug RSA 2048 签名者。匿名下载复算哈希一致。
 
 ## GitHub Actions 云端构建
 
@@ -14,7 +16,7 @@
 
 运行成功后下载：`starscore-debug-apk`、`starscore-build-evidence` 和 `starscore-compose-evidence`。前两者分别包含 `app-debug.apk` 与 check/Web/assets/Gradle 日志、SHA-256。工作流会在 Ubuntu 24.04 上用 `@capacitor/assets` 从 `apps/web/assets/icon.svg`、`splash.svg` 生成 Android 密度资源。
 
-GitHub Actions [run 37472271902](https://github.com/Qingtian-Zeng/starscore/actions/runs/37472271902) 已实际通过，生成并上传 `starscore-debug-apk`。本地下载文件为 `releases/app-debug.apk`（该目录不提交 Git）；真机安装与生命周期仍待设备验收。
+GitHub Actions [run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 已实际通过，生成并上传 `starscore-debug-apk` 与完整证据。本地交付文件为 `releases/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk`（该目录不提交 Git）；真机安装与生命周期仍待设备验收。
 
 ## 已接入
 
