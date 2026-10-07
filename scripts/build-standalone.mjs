@@ -30,7 +30,7 @@ const overrides=`
 .legend-response,.candidate-actions .accept,.note-origin.rules,.note-origin.model{background:var(--response)}
 .candidate-card strong{color:var(--response)}
 .project-thumb line.response{stroke:var(--response)}.project-thumb circle.response{fill:var(--response)}
-html[data-show-pitch="false"] .preview-pitch-label{display:none}
+html[data-show-pitch="true"] .preview-pitch-label{display:block}
 html[data-show-background="false"] .preview-background-star{display:none}
 html[data-show-hints="false"] .hint{display:none}
 html[data-show-note-list="false"] .note-list{display:none}
@@ -47,8 +47,8 @@ html[data-preview-theme="aurora"] .canvas-shell,html[data-preview-theme="aurora"
 }
 `;
 const appDocument=`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>星谱 StarScore</title><style>${css}\n${overrides}</style></head><body><div id="root"></div><script>window.__STARSCORE_HTML_PREVIEW__=true;</script><script>${js.replace(/<\/script/gi,'<\\/script')}</script></body></html>`;
-const initial={theme:'navy',accent:'#65e6e2',response:'#bfa2f6',canvasHeight:560,starSize:1,radius:28,linkOpacity:.42,showPitch:false,showBackground:true,showHints:true,showNoteList:true,showInspector:true,showTracks:true,showResponses:true,viewport:'auto'};
+const initial={theme:'navy',accent:'#65e6e2',response:'#bfa2f6',canvasHeight:560,starSize:1,radius:28,linkOpacity:.42,showPitch:false,showBackground:true,showHints:true,showNoteList:true,showInspector:true,showTracks:true,showResponses:true,viewport:'phone'};
 // A replacement callback keeps JavaScript's literal $&/$`/$' sequences intact.
 const html=shell.replace('__PREVIEW_SETTINGS__',()=>JSON.stringify(initial)).replace('__APP_DOCUMENT__',()=>JSON.stringify(appDocument).replace(/</g,'\\u003c')).replace('__THIRD_PARTY_NOTICES__',()=>notices.replace(/<\/script/gi,'<\\/script'));
 await writeFile(output,html,'utf8');
-console.log(JSON.stringify({output,bytes:Buffer.byteLength(html),baseTag:'v0.1.0-hackathon',baseCommit:'b5f0331cb134df8fd087b9ae2ccf9d4a55c8d39a'}));
+console.log(JSON.stringify({output,bytes:Buffer.byteLength(html),baseTag:'v0.2.1-confirmed-ui'}));

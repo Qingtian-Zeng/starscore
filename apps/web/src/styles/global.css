@@ -38,6 +38,7 @@ button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .project-thumb { height:210px; background:radial-gradient(circle at 50% 20%,#12314c,#06101c 74%); }
 .project-thumb svg { width:100%;height:100%; }.project-thumb line{stroke:var(--cyan);stroke-width:2;opacity:.42}.project-thumb circle{fill:#a4fffa;filter:drop-shadow(0 0 8px #65e6e2)}
 .project-thumb line.response{stroke:#bfa2f6;stroke-dasharray:5 6}.project-thumb circle.response{fill:#d7c5ff;filter:drop-shadow(0 0 8px #bfa2f6)}
+.preview-pitch-label{display:none}html[data-show-pitch="true"] .preview-pitch-label{display:block}
 .project-card-body { padding:16px; display:flex; justify-content:space-between; gap:12px; align-items:end; }.project-card h3{margin:0 0 7px;font-size:18px}.project-card p{margin:0;color:var(--muted);font-size:12px}
 .card-actions { display:flex;gap:7px}.card-actions button{min-width:40px;height:40px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}.card-actions .open{padding:0 12px;background:var(--cyan);color:var(--night);border:0}
 .empty-library { min-height:360px; border:1px dashed rgba(155,207,233,.2);border-radius:24px;display:grid;place-content:center;text-align:center;color:var(--muted)}.empty-library h3{color:var(--ink);margin:14px 0 5px}.empty-library p{margin:0}

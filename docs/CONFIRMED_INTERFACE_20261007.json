@@ -1,0 +1,23 @@
+{
+  "kind": "StarScorePreviewAppearance",
+  "version": 1,
+  "source": "StarScore-preview-2026-10-07T12-26-51.html",
+  "sourceSha256": "3a0887036391a6f99d7564795d4ef28b61821b2b3928cd243faae6a312d5b4b3",
+  "appearance": {
+    "theme": "navy",
+    "accent": "#65e6e2",
+    "response": "#bfa2f6",
+    "canvasHeight": 560,
+    "starSize": 1,
+    "radius": 28,
+    "linkOpacity": 0.42,
+    "showPitch": false,
+    "showBackground": true,
+    "showHints": true,
+    "showNoteList": true,
+    "showInspector": true,
+    "showTracks": true,
+    "showResponses": true,
+    "viewport": "phone"
+  }
+}
