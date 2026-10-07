@@ -2,7 +2,9 @@
 
 > **v0.2.0 银河相遇版**：默认进入 `#/community`，在本机银河中试听 7 位示例居民的 14 段原创星谱，创建灵感副本后继续作曲、生成回应并分享星系文件。
 
-[公开仓库](https://github.com/Qingtian-Zeng/starscore) · [独立 HTML 演示](demos/StarScore_Interactive_Preview.html) · 新版 APK/Release 链接在 v0.2.0 发布后更新
+[公开仓库](https://github.com/Qingtian-Zeng/starscore) · [v0.2.0 Galaxy Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) · [下载 Android APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk) · [独立 HTML 演示](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html)
+
+APK：5,461,302 字节；SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。这是 Android debug 测试签名包，真机安装仍需设备验收。
 
 ## 银河相遇版新增
 
