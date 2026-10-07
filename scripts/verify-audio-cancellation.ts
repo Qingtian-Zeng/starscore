@@ -1,0 +1,24 @@
+import assert from "node:assert/strict";
+import { createNightSailProject } from "@starscore/core";
+
+const starts:Array<()=>void>=[];const scheduled:string[]=[];const timers=new Map<number,()=>void>();let serial=0;let created=0;let transportStarts=0;
+const transport={stop(){},cancel(){scheduled.length=0},position:0,PPQ:480,bpm:{value:90},scheduleOnce(_fn:unknown,when:string){scheduled.push(when)},start(){transportStarts++}};
+(globalThis as any).__TONE_QA={start:()=>new Promise<void>(resolve=>starts.push(resolve)),transport,onSynth:()=>created++};
+(globalThis as any).window={setTimeout:(callback:()=>void)=>{const id=++serial;timers.set(id,callback);return id},clearTimeout:(id:number)=>timers.delete(id)};
+const {audioEngine}=await import("../apps/web/src/audio/AudioEngine");
+const project=createNightSailProject();
+const hooks={onNote(){},onProgress(){},onEnded(){}};
+const canceled=audioEngine.play(project,hooks);
+audioEngine.stop();starts.shift()!();await canceled;
+assert.equal(transportStarts,0,"stop while audio unlock is pending must prevent later playback");
+assert.equal(created,0,"canceled startup must not create audio nodes");
+const first=audioEngine.play(project,hooks);const second=audioEngine.play(project,hooks);
+starts.shift()!();await first;assert.equal(transportStarts,0);
+starts.shift()!();await second;assert.equal(transportStarts,1);
+assert.equal(scheduled.length,project.tracks.lead.events.length+project.tracks.bass.events.length+project.tracks.drums.events.length+1);
+assert.ok(scheduled.includes("7680i"));assert.equal(timers.size,1);
+audioEngine.stop();assert.equal(timers.size,0);
+const disposed=audioEngine.play(project,hooks);audioEngine.dispose();starts.shift()!();await disposed;
+assert.equal(transportStarts,1,"leaving the page during startup must not restart sound");
+assert.equal(audioEngine.getDebugState().initialized,false);
+console.log("PASS: pending playback cancellation, rapid-track switching, full score scheduling, timer cleanup and dispose during startup.");

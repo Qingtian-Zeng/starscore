@@ -1,5 +1,20 @@
 # 星谱 StarScore
 
+> **v0.2.0 银河相遇版**：默认进入 `#/community`，在本机银河中试听 7 位示例居民的 14 段原创星谱，创建灵感副本后继续作曲、生成回应并分享星系文件。
+
+[公开仓库](https://github.com/Qingtian-Zeng/starscore) · [独立 HTML 演示](demos/StarScore_Interactive_Preview.html) · 新版 APK/Release 链接在 v0.2.0 发布后更新
+
+## 银河相遇版新增
+
+- 银河社区成为主入口，含可跳过进入动画、减少动态、星云详情、随机倾听、关注与喜欢。
+- 十二星座提供 12 段原创主题，星谱素材提供 6 段原创预设；试听不跳页，点击星图建立独立副本。
+- 路由保留 `zodiac`、`materials`、`library`、`community` 来源；社区灵感副本返回具体作者星云。
+- 作者可把 1—8 段本机作品发布为本机星云，并交换 `.starscore-galaxy.json`。当前不是实时在线社区。
+- Web/App 无 API 时使用共享 core 的规则回应；真实模型仍只读取服务端配置。
+- 静态 Web 可直接下载 JSON/MIDI；Android 用 Filesystem + Share 分享 JSON、MIDI 与星系文件。
+
+新增路由：`#/community`、`#/community/:galaxyId`、`#/discover/zodiac`、`#/discover/materials`。原画室、作品库、演奏页及 IndexedDB `starscore` 数据保持兼容。
+
 > 画一片星空，听它长成音乐。
 
 StarScore 是一款面向零乐理用户的可视化音乐创作工具：在星图上点下音符、拖动改变音高，用星尾表达时值、光晕表达力度，再让规则生成器或真实模型为前两小节续写回应。作品可在 Web 与 Android 测试版中播放、保存并导出 JSON/MIDI。

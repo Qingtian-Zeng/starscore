@@ -10,8 +10,9 @@ class AudioEngine {
   private scheduled: number[] = [];
   private runToken = 0;
 
-  private async ready() {
+  private async ready(token: number) {
     await Tone.start();
+    if(token!==this.runToken)return false;
     if (!this.leadSynth) {
       this.gains = { lead: new Tone.Gain(.82).toDestination(), bass: new Tone.Gain(.52).toDestination(), drums: new Tone.Gain(.42).toDestination() };
       this.leadSynth = new Tone.PolySynth(Tone.Synth, {
@@ -23,17 +24,18 @@ class AudioEngine {
       this.tap = new Tone.NoiseSynth({ noise: { type: "pink" }, envelope: { attack: .001, decay: .055, sustain: 0 } }).connect(this.gains.drums); this.tap.volume.value = -18;
       this.hat = new Tone.MetalSynth({ envelope: { attack: .001, decay: .04, release: .015 }, harmonicity: 4.2, modulationIndex: 18, resonance: 2600, octaves: 1.5 }).connect(this.gains.drums); this.hat.frequency.value = 220; this.hat.volume.value = -22;
     }
+    return true;
   }
 
   async audition(note: NoteEvent) {
-    await this.ready();
+    if(!await this.ready(this.runToken))return;
     this.leadSynth!.triggerAttackRelease(pitchNames[note.pitch] ?? Tone.Frequency(note.pitch, "midi").toNote(), Math.max(.09, note.durationTick / PPQ * 60 / BPM * .7), undefined, note.velocity);
   }
 
   async play(project: StarScoreProject, hooks: PlaybackHooks) {
     this.stop();
-    await this.ready();
-    const token = ++this.runToken;
+    const token=this.runToken;
+    if(!await this.ready(token))return;
     const ticksToSeconds = (ticks: number) => ticks / PPQ * 60 / BPM;
     (Object.keys(project.mixer) as Array<keyof typeof project.mixer>).forEach(track => { this.gains![track].gain.value = project.mixer[track].enabled ? project.mixer[track].gain : 0; });
     const transport = Tone.getTransport(); transport.stop(); transport.cancel(); transport.PPQ = PPQ; transport.bpm.value = BPM; transport.position = 0;
