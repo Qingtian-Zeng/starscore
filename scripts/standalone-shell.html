@@ -63,7 +63,7 @@ body{min-width:320px}
   <section class="section"><h3 id="snapshotHeading">当前作品</h3><dl class="snapshot"><div><dt>作品名称</dt><dd id="projectTitle">夜航</dd></div><div><dt id="snapshotNotesLabel">原旋律 / 回应</dt><dd id="projectNotes">6 / 0 颗星</dd></div><div><dt id="snapshotBeatsLabel">原旋律时值</dt><dd id="projectBeats">8 / 8 拍</dd></div><div><dt>演奏状态</dt><dd id="playState" class="good">准备就绪</dd></div><div><dt id="snapshotSourceLabel">回应来源</dt><dd id="responseSource">尚未采用</dd></div></dl></section>
   <section class="section"><h3>保存本次修改</h3><p>外观调整自动保存在此浏览器。保存当前 HTML 可以分享这一版界面；项目 JSON 可以继续导入 App。</p><div class="panel-actions"><button class="button" id="importSettings">导入配置</button><button class="button" id="resetSettings">恢复默认</button></div><input id="settingsFile" type="file" accept="application/json,.json" hidden></section>
 </aside>
-<footer class="footer"><span>基于已发布 App · v0.1.0-hackathon <span class="source">· <a href="https://github.com/Qingtian-Zeng/starscore" target="_blank" rel="noopener">源码</a></span></span><span>HTML 修改确认后可同步到 App 工程</span></footer>
+<footer class="footer"><span>基于已确认界面 · v0.2.1 <span class="source">· <a href="https://github.com/Qingtian-Zeng/starscore" target="_blank" rel="noopener">源码</a></span></span><span>界面参数已同步到 App 工程</span></footer>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script id="preview-settings" type="application/json">__PREVIEW_SETTINGS__</script>
@@ -71,7 +71,7 @@ body{min-width:320px}
 <script id="third-party-notices" type="text/plain">__THIRD_PARTY_NOTICES__</script>
 <script>
 (() => {
-  const defaults={theme:'navy',accent:'#65e6e2',response:'#bfa2f6',canvasHeight:560,starSize:1,radius:28,linkOpacity:.42,showPitch:false,showBackground:true,showHints:true,showNoteList:true,showInspector:true,showTracks:true,showResponses:true,viewport:'auto'};
+  const defaults={theme:'navy',accent:'#65e6e2',response:'#bfa2f6',canvasHeight:560,starSize:1,radius:28,linkOpacity:.42,showPitch:false,showBackground:true,showHints:true,showNoteList:true,showInspector:true,showTracks:true,showResponses:true,viewport:'phone'};
   const $=id=>document.getElementById(id);
   const storageKey='starscore-preview-appearance-v1:'+location.pathname;
   function validate(value){
@@ -151,7 +151,7 @@ body{min-width:320px}
   $('fitButton').onclick=()=>{fit=true;layout();};$('actualButton').onclick=()=>{fit=false;layout();};$('togglePanel').onclick=()=>document.body.classList.toggle('panel-open');
   $('resetSettings').onclick=()=>{settings={...defaults,viewport:settings.viewport};apply();toast('界面已恢复默认。');};
   function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type}));const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
-  $('exportSettings').onclick=()=>{const payload={kind:'StarScorePreviewAppearance',version:1,baseTag:'v0.1.0-hackathon',baseCommit:'b5f0331cb134df8fd087b9ae2ccf9d4a55c8d39a',appearance:settings};download(JSON.stringify(payload,null,2),'application/json','StarScore-appearance.json');toast('界面配置已导出。');};
+  $('exportSettings').onclick=()=>{const payload={kind:'StarScorePreviewAppearance',version:1,baseTag:'v0.2.1-confirmed-ui',appearance:settings};download(JSON.stringify(payload,null,2),'application/json','StarScore-appearance.json');toast('界面配置已导出。');};
   $('importSettings').onclick=()=>$('settingsFile').click();
   $('settingsFile').onchange=async event=>{
     const file=event.target.files[0];event.target.value='';if(!file)return;
