@@ -3,7 +3,7 @@
 ## v0.2.1 已确认界面构建（2026-10-07）
 
 - [Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 使用 Ubuntu 24.04、JDK 21、Android SDK 36 成功。
-- APK：[StarScore-v0.2.1-confirmed-ui-debug.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore-v0.2.1-confirmed-ui-debug.apk)，5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`。
+- 最终 APK：[StarScore-v0.2.1-confirmed-ui-debug.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-v0.2.1-confirmed-ui-debug.apk)，5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`。
 - `aapt`：`com.starscore.app`、versionCode 3、versionName 0.2.1、minSdk 24、targetSdk 36。
 - `apksigner`：APK Signature Scheme v2 验证通过，Android Debug RSA 2048 单签名者。不是生产 release keystore。
 
@@ -13,8 +13,8 @@
 - Android APK 由 Ubuntu 24.04 + JDK 21 的 Actions 生成；本地已完成 Web 构建与检查。
 - 本次仍是 CI 默认 debug 签名测试包；没有稳定 release keystore，因此不能保证跨 CI 运行覆盖安装。升级前应导出 JSON/星系文件备份本机作品。
 - 正式数据库仍为 IndexedDB `starscore`，未切换到 HTML 预览数据库。
-- 最终 [Actions run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 通过；[Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) 已发布。
-- APK：[StarScore-v0.2.0-galaxy-debug.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk)，5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。
+- 历史 [Actions run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 通过；对应旧 Release 已隐藏为 Draft，Tag 保留用于追溯。
+- 旧版 APK 为 5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`；请勿用于参赛评审。
 - `aapt` 确认包名/版本/minSdk/targetSdk；`apksigner` 确认 v2 签名有效、1 个 Android Debug RSA 2048 签名者。匿名下载复算哈希一致。
 
 ## GitHub Actions 云端构建
