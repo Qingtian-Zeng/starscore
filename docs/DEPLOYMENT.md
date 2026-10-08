@@ -2,7 +2,7 @@
 
 ## v0.2.1 部署验证（2026-10-07）
 
-[Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 已实际构建 Compose，并通过 Web、同源 `/api/health` 与规则回应 smoke。确认版独立 HTML 已作为 [最终 Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore_Interactive_Preview-v0.2.1.html) 发布。当前仍未提供公网 HTTPS API 托管地址；Release 下载不等同 Web/API 正式部署。
+[Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 已实际构建 Compose，并通过 Web、同源 `/api/health` 与规则回应 smoke。独立 HTML 已作为 [最终 Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Interactive-Demo.html) 发布。当前仍未提供公网 HTTPS API 托管地址；Release 下载不等同 Web/API 正式部署。
 
 ## v0.2.0 部署说明（2026-10-07）
 
