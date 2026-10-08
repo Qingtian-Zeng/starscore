@@ -2,7 +2,7 @@
 
 > **最终参赛交付版（推荐）**：界面、功能、Android 测试包、演示视频和作品封面已集中到同一个 Release。评审与体验请只使用下列入口。
 
-[在线体验](https://qingtian-zeng.github.io/starscore/) · [最终参赛 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.2-hackathon-submission) · [下载 APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-v0.2.1-confirmed-ui-debug.apk) · [观看演示视频](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Demo-v8-Calm-Voice-Music-2m20s.mp4) · [下载作品封面](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Cover-1080x1920.png)
+[在线体验](https://qingtian-zeng.github.io/starscore/) · [最终参赛 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.2-hackathon-submission) · [下载完整参赛包](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Submission-Package.zip) · [下载 APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Android.apk) · [观看演示视频](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Demo.mp4) · [下载作品封面](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Cover.png)
 
 Android 包名为 `com.starscore.app`，versionName `0.2.1`，versionCode `3`。旧版 Release 已隐藏为 Draft，Tag 仅用于历史追溯，不作为评审下载入口。
 
