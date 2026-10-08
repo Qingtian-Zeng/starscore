@@ -10,6 +10,7 @@
 - 作品封面：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Cover.png
 - 独立 HTML：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Interactive-Demo.html
 - SHA-256：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-SHA256.txt
+- 报名表填写稿：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Submission-Form.md
 - 公开仓库：https://github.com/Qingtian-Zeng/starscore
 - 构建记录：https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397
 
@@ -20,9 +21,9 @@
 - 作品名称：星谱 StarScore
 - 参赛赛道：赛道二「创新音乐产品」
 
-## 作品介绍及创作思路（277 字）
+## 作品介绍及创作思路（294 字）
 
-星谱 StarScore 是一款面向零乐理用户的可视化音乐创作产品。我们发现，传统编曲软件以时间轴、钢琴卷帘和大量参数为核心，新手往往有旋律灵感，却难以把它转化为完整作品。星谱把音符变成银河中的星点：横向位置对应时间，纵向位置对应音高，星尾表达时值，光晕表达力度；用户通过点星和拖动即可写下旋律，并获得实时声音反馈。系统还能在统一音乐约束下生成两种后半段回应，支持比较试听、采用、撤销与重做。作品可保存为个人星系，在 Web、Android 与自适应界面中继续创作，并导出 JSON 和三声部 MIDI，让“看见音乐、听见星空”成为完整可交换的创作体验。
+星谱 StarScore 是一款面向零乐理用户的可视化音乐创作产品。针对传统编曲软件参数复杂、灵感难以快速落地的问题，星谱把音符变成银河中的星点：位置对应时间与音高，星尾表达时值，光晕表达力度；用户通过点星、拖动即可创作旋律，并获得实时声音反馈。系统能够生成两种后半段音乐回应，支持比较试听、采用、撤销、保存及 MIDI 导出。“银河社区”让每首作品成为一片可探索、可试听的星系，用户可以发现他人作品、获取灵感副本并继续创作。未来还将加入 AI 填词、歌词优化、人声演唱与智能编曲，使用户从一段星光旋律出发，完成具有个人表达的独创歌曲，实现从“看见音乐、听见星空”到“分享属于自己的歌”。
 
 ## 交付资产与校验
 
