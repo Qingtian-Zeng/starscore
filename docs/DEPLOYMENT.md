@@ -2,7 +2,7 @@
 
 ## v0.2.1 部署验证（2026-10-07）
 
-[Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 已实际构建 Compose，并通过 Web、同源 `/api/health` 与规则回应 smoke。确认版独立 HTML 已作为 [Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore_Interactive_Preview-v0.2.1.html) 发布。当前仍未提供公网 HTTPS 托管地址；Release 下载不等同 Web/API 正式部署。
+[Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 已实际构建 Compose，并通过 Web、同源 `/api/health` 与规则回应 smoke。确认版独立 HTML 已作为 [最终 Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore_Interactive_Preview-v0.2.1.html) 发布。当前仍未提供公网 HTTPS API 托管地址；Release 下载不等同 Web/API 正式部署。
 
 ## v0.2.0 部署说明（2026-10-07）
 
@@ -10,7 +10,7 @@
 
 无 API 时，银河、素材、作品编辑、播放、IndexedDB、JSON/MIDI/星系文件下载和离线规则回应仍可用；只有真实模型不可用。独立 HTML 位于 `demos/StarScore_Interactive_Preview.html`，使用独立预览数据库，不等同线上部署或 App 数据。
 
-当前没有已授权公网 HTTPS 托管地址；Compose 与同源 API 已由 [delivery run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 实际构建并通过 smoke test。独立 HTML 已作为 [Release 资产](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html) 公开下载，但它不是托管站点。
+当前没有已授权公网 HTTPS API 托管地址；Compose 与同源 API 已由 [delivery run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 实际构建并通过 smoke test。浏览器体验请使用 [在线 Demo](https://qingtian-zeng.github.io/starscore/)，独立 HTML 请从最终 Release 下载。
 
 ## 自动 smoke 验证
 
