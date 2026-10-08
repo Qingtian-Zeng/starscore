@@ -3,7 +3,7 @@
 ## v0.2.1 已确认界面构建（2026-10-07）
 
 - [Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 使用 Ubuntu 24.04、JDK 21、Android SDK 36 成功。
-- 最终 APK：[StarScore-v0.2.1-confirmed-ui-debug.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-v0.2.1-confirmed-ui-debug.apk)，5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`。
+- 最终 APK：[StarScore-Android.apk](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Android.apk)，5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`。
 - `aapt`：`com.starscore.app`、versionCode 3、versionName 0.2.1、minSdk 24、targetSdk 36。
 - `apksigner`：APK Signature Scheme v2 验证通过，Android Debug RSA 2048 单签名者。不是生产 release keystore。
 
