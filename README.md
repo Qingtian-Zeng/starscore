@@ -1,16 +1,10 @@
 # 星谱 StarScore
 
-> **v0.2.1 已确认界面版**：已将 `StarScore-preview-2026-10-07T12-26-51.html` 的确认参数合并到正式 Web/App，保持作品数据结构与 IndexedDB `starscore` 不变。
+> **最终参赛交付版（推荐）**：界面、功能、Android 测试包、演示视频和作品封面已集中到同一个 Release。评审与体验请只使用下列入口。
 
-[在线体验](https://qingtian-zeng.github.io/starscore/) · [v0.2.1 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui) · [下载 APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore-v0.2.1-confirmed-ui-debug.apk) · [确认版 HTML](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.1-confirmed-ui/StarScore_Interactive_Preview-v0.2.1.html) · [构建记录](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397)
+[在线体验](https://qingtian-zeng.github.io/starscore/) · [最终参赛 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.2-hackathon-submission) · [下载 APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-v0.2.1-confirmed-ui-debug.apk) · [观看演示视频](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Demo-v8-Calm-Voice-Music-2m20s.mp4) · [下载作品封面](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Cover-1080x1920.png)
 
-APK：5,461,350 字节；SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`；包名 `com.starscore.app`，versionName `0.2.1`，versionCode `3`。
-
-> **v0.2.0 银河相遇版**：默认进入 `#/community`，在本机银河中试听 7 位示例居民的 14 段原创星谱，创建灵感副本后继续作曲、生成回应并分享星系文件。
-
-[公开仓库](https://github.com/Qingtian-Zeng/starscore) · [v0.2.0 Galaxy Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) · [下载 Android APK](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore-v0.2.0-galaxy-debug.apk) · [独立 HTML 演示](https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.0-galaxy/StarScore_Interactive_Preview.html)
-
-APK：5,461,302 字节；SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。这是 Android debug 测试签名包，真机安装仍需设备验收。
+Android 包名为 `com.starscore.app`，versionName `0.2.1`，versionCode `3`。旧版 Release 已隐藏为 Draft，Tag 仅用于历史追溯，不作为评审下载入口。
 
 ## 银河相遇版新增
 
