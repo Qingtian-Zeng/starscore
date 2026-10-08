@@ -4,10 +4,12 @@
 
 - 在线 Demo：https://qingtian-zeng.github.io/starscore/
 - 最终参赛 Release：https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.2-hackathon-submission
-- Android APK：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-v0.2.1-confirmed-ui-debug.apk
-- 演示视频：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Demo-v8-Calm-Voice-Music-2m20s.mp4
-- 作品封面：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Hackathon-Cover-1080x1920.png
-- 独立 HTML：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore_Interactive_Preview-v0.2.1.html
+- 完整参赛包：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Submission-Package.zip
+- Android APK：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Android.apk
+- 演示视频：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Demo.mp4
+- 作品封面：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Cover.png
+- 独立 HTML：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-Interactive-Demo.html
+- SHA-256：https://github.com/Qingtian-Zeng/starscore/releases/download/v0.2.2-hackathon-submission/StarScore-SHA256.txt
 - 公开仓库：https://github.com/Qingtian-Zeng/starscore
 - 构建记录：https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397
 
