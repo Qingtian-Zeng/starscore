@@ -5,7 +5,7 @@
 - 确认 HTML SHA-256 为 `3a0887036391a6f99d7564795d4ef28b61821b2b3928cd243faae6a312d5b4b3`；参数快照见 `CONFIRMED_INTERFACE_20261007.json`。
 - 已修正正式 App 与确认稿的唯一默认差异：音高标签默认隐藏；仍可由独立预览开关显示。确认颜色、画布、圆角、星点、连线及功能面板状态均受 CI 守卫保护。
 - 保持 `com.starscore.app`、IndexedDB `starscore` 和项目 schema；Android 升至 versionName 0.2.1 / versionCode 3。
-- [Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 全部通过；[v0.2.1 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.1-confirmed-ui) 已公开。
+- [Actions run 37623320397](https://github.com/Qingtian-Zeng/starscore/actions/runs/37623320397) 全部通过；交付资产已汇总到 [v0.2.2 最终参赛 Release](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.2-hackathon-submission)。
 - APK 5,461,350 字节，SHA-256 `9d8e939353a79eb6bff939e5102780704431d0c87c2efdce74cee8cdb15ec67b`；匿名下载复算一致。
 - 真机、真实 AI、人工听感、外部 DAW 与公网 HTTPS 仍未执行。
 
@@ -18,7 +18,7 @@
 - build、check、目录/银河/音频回归、独立 HTML、交接导航/HTML 检查均通过。
 - 390×844 浏览器验证默认银河无横向溢出、素材独立副本、离线规则 A/B、社区具体来源路由通过。
 - [最终 Actions run 37586957868](https://github.com/Qingtian-Zeng/starscore/actions/runs/37586957868) 已通过：检查、Web、目录/音频回归、Compose、Capacitor、`assembleDebug`、APK 元数据与 v2 签名校验全部成功。
-- [v0.2.0 Galaxy 预发布](https://github.com/Qingtian-Zeng/starscore/releases/tag/v0.2.0-galaxy) 已公开；APK 5,461,302 字节，SHA-256 `46a33c374ca72bbb784cbb2141f8fc32a6ebb926b439ed936383ee8ce1053967`。匿名重新下载 HTTP 200 且哈希一致。
+- v0.2.0 Galaxy 历史预发布曾完成匿名下载与哈希验证；现已隐藏为 Draft，Tag 保留用于追溯，不作为参赛入口。
 - 真机、真实 AI、人工听感、外部 DAW 和公网 HTTPS 托管尚未执行；未以自动化结果冒充人工/设备验证。
 
 ## 交付验证阶段（2026-10-06）
